@@ -11,6 +11,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Utility.Constants;
 
 /**
  *
@@ -26,7 +27,7 @@ public class ServerRead implements Runnable {
 
     public void readFromServer() throws IOException {
         int i = 0;
-        ServerSocket inSocket = new ServerSocket(7000);
+        ServerSocket inSocket = new ServerSocket(Constants.getReadPort());
         while (true) {
             Socket connectionSocket = inSocket.accept();
             BufferedReader reader = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));

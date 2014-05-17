@@ -8,8 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Utility.Constants;
 
 /**
  *
@@ -33,24 +32,24 @@ public class ServerConnection implements Runnable {
             try {
                 joinGame();
             } catch (InterruptedException ex) {
-                Logger.getLogger(ServerConnection.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("InterruptedException "+ex.getMessage());
             }
         } catch (UnknownHostException ex) {
-            Logger.getLogger(ServerConnection.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("UnknownHost "+ex.getMessage());
         } catch (IOException ex) {
-            Logger.getLogger(ServerConnection.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("IOException "+ex.getMessage());
         }
     }
 
     public void createSocket() throws UnknownHostException, IOException {
-        clientSocket = new Socket("localhost", 6000);
+        clientSocket = new Socket(Constants.getHost(), Constants.getWritePort());
     }
 
     public void closeConnection() {
         try {
             clientSocket.close();
         } catch (IOException ex) {
-            Logger.getLogger(ServerConnection.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("IOException "+ex.getMessage());
         }
     }
 }

@@ -10,6 +10,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Utility.Constants;
 
 /**
  *
@@ -30,7 +31,7 @@ public class WriteToServer {
     }
 
     public void createSocket() throws UnknownHostException, IOException {
-        clientSocket = new Socket("localhost", 6000);
+        clientSocket = new Socket(Constants.getHost(), Constants.getWritePort());
     }
 
     public void closeConnection() {

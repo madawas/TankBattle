@@ -29,7 +29,7 @@ public class DataHandler {
     private ArrayList coins = new ArrayList<CoinPile>();
     private ArrayList lifePacks = new ArrayList<LifePack>();
     private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-    private GameUI game;
+    private GameUI gameInterface;
     private Bullet bullet;
     private AI ai;
     public static int player;
@@ -85,8 +85,8 @@ public class DataHandler {
                 players[i] = new Player(name, x, y, 0, false, direction);
             }
             
-            game = new GameUI();
-            game.getGuiInstance().initialize(bricks, water, stones, players, coins, lifePacks, bullets);
+            gameInterface = new GameUI();
+            gameInterface.getGuiInstance().initialize(bricks, water, stones, players, coins, lifePacks, bullets);
             ai = new AI(coins, lifePacks, players, bricks, water, stones, bullets);
             ai.generateSqures();
             ai.createAdjecencies();
@@ -98,6 +98,7 @@ public class DataHandler {
         //Player Data Parsing
         if (s.split(":")[0].equalsIgnoreCase("G")) {
             temp = s.split(":");
+            
             for (int i = 0; i < players.length; i++) {
                 x = Integer.parseInt(temp[i + 1].split(";")[1].split(",")[0]) * 25;
                 y = Integer.parseInt(temp[i + 1].split(";")[1].split(",")[1]) * 25;
