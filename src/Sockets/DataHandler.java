@@ -74,10 +74,10 @@ public class DataHandler {
         //Player Location Messsage Parsing
         if (s.split(":")[0].equalsIgnoreCase("S")) {//if S message            
             temp = s.split(":");
-            int xx = temp.length - 1;
-            players = new Player[xx];
+            int numPlayers = temp.length - 1;
+            players = new Player[numPlayers];
             
-            for (int i = 0; i < xx; i++) {
+            for (int i = 0; i < numPlayers; i++) {
                 name = temp[i + 1].split(";")[0];
                 x = Integer.parseInt(temp[i + 1].split(";")[1].split(",")[0]) * 25;
                 y = Integer.parseInt(temp[i + 1].split(";")[1].split(",")[1]) * 25;
@@ -150,32 +150,32 @@ public class DataHandler {
         return bricks;
     }
 
-    public void setBricks(Brick[] brcks) {
-        this.bricks = brcks;
+    public void setBricks(Brick[] bricks) {
+        this.bricks = bricks;
     }
 
     public Water[] getWter() {
         return water;
     }
 
-    public void setWater(Water[] wter) {
-        this.water = wter;
+    public void setWater(Water[] water) {
+        this.water = water;
     }
 
     public Stone[] getStone() {
         return stones;
     }
 
-    public void setStone(Stone[] stne) {
-        this.stones = stne;
+    public void setStone(Stone[] stones) {
+        this.stones = stones;
     }
 
     public Player[] getPlayers() {
         return players;
     }
 
-    public void setPlyr(Player[] plyr) {
-        this.players = plyr;
+    public void setPlyr(Player[] players) {
+        this.players = players;
     }
 
     public ArrayList getCoins() {
@@ -190,7 +190,7 @@ public class DataHandler {
         return lifePacks;
     }
 
-    public void setLifePacks(ArrayList life) {
-        this.lifePacks = life;
+    public void setLifePacks(ArrayList lifePacks) {
+        this.lifePacks = lifePacks;
     }
 }

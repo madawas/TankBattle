@@ -105,7 +105,7 @@ public class GUI extends JPanel implements ActionListener {
             y = players[i].getNextY();
             direction = players[i].getDirection();
 
-            dir = players[i].getPresentD();
+            dir = players[i].getCurrentDirn();
             rotation = players[i].getRotation();
             transform.setToTranslation(x, y);
             transform.rotate(Math.toRadians(rotation), 12.5, 12.5);
@@ -226,7 +226,7 @@ public class GUI extends JPanel implements ActionListener {
                 }
             }
             for (int j = 0; j < players.length; j++) {
-                two = players[j].getRec();
+                two = players[j].getRectangle();
                 if (one.intersects(two) && bullet.get(i).getShootBy() != j) {
 
                     if (bullet.size() > 0) {
@@ -237,7 +237,7 @@ public class GUI extends JPanel implements ActionListener {
                 }
             }
             for (int j = 0; j < bricks.length; j++) {
-                two = bricks[j].getRec();
+                two = bricks[j].getRectangle();
                 if (one.intersects(two)) {
 
                     if (bullet.size() > 0) {

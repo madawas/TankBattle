@@ -9,26 +9,26 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Harsha
+ * @author Madawa
  */
 public class Brick {
 
     private int x;
     private int y;
     private int damage;
-    private String brickLocation="bricks.jpg";
+    private String brickLocation = "bricks.jpg";
     private ImageIcon brick;
-    private Rectangle rec;
+    private Rectangle rectangle;
     private int imageX;
     private int imageY;
     private boolean visible;
+
     public Brick(int x, int y, int damage) {
         this.x = x;
         this.y = y;
         this.damage = damage;
-        brick=new ImageIcon(brickLocation);
+        brick = new ImageIcon(brickLocation);
     }
-    
 
     /**
      * @return the x
@@ -103,18 +103,18 @@ public class Brick {
     /**
      * @return the rec
      */
-    public Rectangle getRec() {
-        imageX=this.getBrick().getImage().getWidth(null);
-        imageY=this.getBrick().getImage().getHeight(null);
-        rec=new Rectangle(x,y,imageX,imageY);
-        return rec;
+    public Rectangle getRectangle() {
+        imageX = this.getBrick().getImage().getWidth(null);
+        imageY = this.getBrick().getImage().getHeight(null);
+        rectangle = new Rectangle(x, y, imageX, imageY);
+        return rectangle;
     }
 
     /**
-     * @param rec the rec to set
+     * @param rectangle the rec to set
      */
-    public void setRec(Rectangle rec) {
-        this.rec = rec;
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 
     /**
