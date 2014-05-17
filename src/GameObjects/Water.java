@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package GraphicOb;
+package GameObjects;
 
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
@@ -12,21 +12,21 @@ import javax.swing.ImageIcon;
  *
  * @author Harsha
  */
-public class Stone {
+public class Water {
     private int x;
     private int y;
-    private ImageIcon stone;
-    private String location="stone.jpg";
+    private String location="water.jpg";
+    private ImageIcon water;
     private int imageX;
     private int imageY;
     private Rectangle rec;
-    public Stone(int x, int y) {
+
+    public Water(int x, int y) {
         this.x = x;
         this.y = y;
-        stone=new ImageIcon(location);
-
+        water=new ImageIcon(location);
     }
-
+    
     /**
      * @return the x
      */
@@ -58,15 +58,15 @@ public class Stone {
     /**
      * @return the brick
      */
-    public ImageIcon getStone() {
-        return stone;
+    public ImageIcon getWater() {
+        return water;
     }
 
     /**
      * @param brick the brick to set
      */
-    public void setBrick(ImageIcon stne) {
-        this.stone = stne;
+    public void setBrick(ImageIcon water) {
+        this.water = water;
     }
 
     /**
@@ -84,8 +84,8 @@ public class Stone {
     }
         public Rectangle getRec()
         {
-        imageX=this.getStone().getImage().getWidth(null);
-        imageY=this.getStone().getImage().getHeight(null);
+        imageX=this.getWater().getImage().getWidth(null);
+        imageY=this.getWater().getImage().getHeight(null);
         rec=new Rectangle(x,y,imageX,imageY);
         return rec;
         }

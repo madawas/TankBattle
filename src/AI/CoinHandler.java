@@ -5,7 +5,7 @@
 
 package AI;
 
-import GraphicOb.CoinPile;
+import GameObjects.CoinPile;
 
 /**
  *

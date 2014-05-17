@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package GraphicOb;
+package GameObjects;
 
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;

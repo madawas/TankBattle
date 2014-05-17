@@ -4,13 +4,13 @@
  */
 package AI;
 
-import GraphicOb.Brick;
-import GraphicOb.Bullet;
-import GraphicOb.CoinPile;
-import GraphicOb.LifePack;
-import GraphicOb.Player;
-import GraphicOb.Stone;
-import GraphicOb.Water;
+import GameObjects.Brick;
+import GameObjects.Bullet;
+import GameObjects.CoinPile;
+import GameObjects.LifePack;
+import GameObjects.Player;
+import GameObjects.Stone;
+import GameObjects.Water;
 import Sockets.DataHandler;
 import Sockets.WriteToServer;
 import java.io.IOException;

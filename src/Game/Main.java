@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package game1;
+package Game;
 
 import Sockets.ServerRead;
 import Sockets.ServerConnection;

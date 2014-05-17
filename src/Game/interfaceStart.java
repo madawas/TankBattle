@@ -9,7 +9,7 @@
  * Created on Dec 17, 2011, 6:03:48 AM
  */
 
-package game1;
+package Game;
 
 import Sockets.ServerRead;
 import Sockets.ServerConnection;
@@ -68,7 +68,7 @@ public class interfaceStart extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/game1/images.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Game/images.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
