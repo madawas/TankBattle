@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Harsha
+ * @author Madawa
  */
 public class CoinPile {
 private int x,y;
@@ -18,7 +18,7 @@ private ImageIcon coin;
 private int value;
 private int lifeTime;
 private long initiateTime;
-private String coinLocation="images/coin.gif";
+private String coinLocation="images/gold_coin.gif";
 private int imageX;
 private int imageY;
 private Rectangle rec;

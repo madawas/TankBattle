@@ -20,7 +20,7 @@ public class Player {
     private boolean alive;
     private boolean shoot;
     private int rotation;
-    private String tankImage = "images/tank.png";
+    private String playerImage;
     private int imageX;
     private int imageY;
     private Rectangle rec;
@@ -32,7 +32,7 @@ public class Player {
     private int rotation270;
     private int rotation0;
 
-    public Player(String name, int x, int y, int damage, boolean shoot, int direction) {
+    public Player(String name, int x, int y, int damage, boolean shoot, int direction,String playerImage) {
         this.name = name;
         this.x = x;
         this.y = y;
@@ -41,7 +41,8 @@ public class Player {
         this.damage = damage;
         this.shoot = shoot;
         currentDirn = direction;
-        north = new ImageIcon(tankImage);
+        this.playerImage = playerImage;
+        north = new ImageIcon(playerImage);
         this.direction = direction;
     }
 
@@ -111,11 +112,11 @@ public class Player {
     }
 
     public String getTankImage() {
-        return tankImage;
+        return playerImage;
     }
 
     public void setTankImage(String location1) {
-        this.tankImage = location1;
+        this.playerImage = location1;
     }
 
     public int getDirection() {

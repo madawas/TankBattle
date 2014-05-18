@@ -13,6 +13,7 @@ import GameObjects.LifePack;
 import GameObjects.Player;
 import GameObjects.Stone;
 import GameObjects.Water;
+import Utility.Constants;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,7 @@ public class DataHandler {
     private AI ai;
     public static int player;
 
-    public void addDetails(String s) {
+    public void parseMessage(String s) {
         String[] temp;
         String[] temp2;
         int x,y,lifeTime,value,direction,coin,health,brickHealth;
@@ -72,11 +73,15 @@ public class DataHandler {
             players = new Player[numPlayers];
             
             for (int i = 0; i < numPlayers; i++) {
+                
                 name = temp[i + 1].split(";")[0];
+                int playerNumber = Integer.parseInt(name.substring(1));
+                
                 x = Integer.parseInt(temp[i + 1].split(";")[1].split(",")[0]) * 25;
                 y = Integer.parseInt(temp[i + 1].split(";")[1].split(",")[1]) * 25;
                 direction = Integer.parseInt(temp[i + 1].split("[;#]")[2]);
-                players[i] = new Player(name, x, y, 0, false, direction);
+                
+                players[i] = new Player(name, x, y, 0, false, direction,"images/tanks/tank"+playerNumber%Constants.MAX_PLAYERS+".png");
             }
             
             gameInterface = new GameUI();
@@ -124,8 +129,9 @@ public class DataHandler {
             
             temp2 = temp[players.length + 1].split("[;#]");
             for (int i = 0; i < bricks.length; i++) {
+                Brick brick = bricks[i];
                 brickHealth = Integer.parseInt(temp2[i].split(",")[2]);
-                bricks[i].setDamage(brickHealth);
+                brick.setDamage(brickHealth);
             }
         }
         //Coin message parsing

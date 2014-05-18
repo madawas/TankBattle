@@ -126,7 +126,7 @@ public class AI extends Thread {
         System.out.println("GOAL=" + xx + "and" + yy);
         xx = getPlayerLocationX(DataHandler.player) / 25;
         yy = getPlayerLocationY(DataHandler.player) / 25;
-        temp = new Player("Temp", xx, yy, 0, false, players[DataHandler.player].getDirection());
+        temp = new Player("Temp", xx, yy, 0, false, players[DataHandler.player].getDirection(),"images/tanks/tank0.png");
         System.out.println("TARGET" + xx + "awwwww" + yy);
         bestListCoins = this.getMaze().findBestPath(xx, yy);
         follow();

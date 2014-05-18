@@ -47,6 +47,7 @@ public class GUI extends JPanel implements ActionListener {
         setDoubleBuffered(true);
     }
 
+    @Override
     public void paint(Graphics graphic) {
         super.paint(graphic);
         Graphics2D g2d = (Graphics2D) graphic;
@@ -72,7 +73,7 @@ public class GUI extends JPanel implements ActionListener {
         timer = new Timer(25, this);
         timer.start();
     }
-
+    
     public void drawMap(Graphics graphic) {
         Graphics2D g = (Graphics2D) graphic;
         for (int i = 0; i < bricks.length; i++) {
@@ -129,6 +130,7 @@ public class GUI extends JPanel implements ActionListener {
         }
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         timeExpireObject();
         collectObjects();
@@ -286,7 +288,7 @@ public class GUI extends JPanel implements ActionListener {
             }
         }
     }
-
+    
     public void moveBullets() {
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).move();

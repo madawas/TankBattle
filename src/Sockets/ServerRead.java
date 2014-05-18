@@ -19,10 +19,10 @@ import Utility.Constants;
  */
 public class ServerRead implements Runnable {
 
-    private DataHandler communicate;
+    private DataHandler gameDataHandler;
 
     public ServerRead() {
-        communicate = new DataHandler();
+        gameDataHandler = new DataHandler();
     }
 
     public void readFromServer() throws IOException {
@@ -32,7 +32,7 @@ public class ServerRead implements Runnable {
             Socket connectionSocket = inSocket.accept();
             BufferedReader reader = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
             String message = reader.readLine();
-            communicate.addDetails(message);
+            gameDataHandler.parseMessage(message);
             
             System.out.println(message);
         }
@@ -43,7 +43,7 @@ public class ServerRead implements Runnable {
         try {
             readFromServer();
         } catch (IOException ex) {
-            Logger.getLogger(ServerRead.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("IO Exception "+ex.getMessage());
         }
     }
 }
