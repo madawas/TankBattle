@@ -11,6 +11,8 @@ public class Constants {
     
     public static final int SCREEN_WIDTH = 500;
     public static final int SCREEN_HEIGHT = 500;
+    public static final int PIXEL_OFFSET_X = 50;
+    public static final int PIXEL_OFFSET_Y = 50;
     public static final int MAX_PLAYERS = 5;
     
     private static String host = null;

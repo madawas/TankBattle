@@ -16,6 +16,7 @@ import GameObjects.LifePack;
 import GameObjects.Player;
 import GameObjects.Stone;
 import GameObjects.Water;
+import Utility.Constants;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import javax.swing.ImageIcon;
@@ -26,25 +27,23 @@ import javax.swing.ImageIcon;
  */
 public class GamePanel extends JPanel implements ActionListener {
 
+    private int x, y;
     private ArrayList<CoinPile> coins;
     private ArrayList<LifePack> lifePacks;
-    private int x, y;
-    private Player[] players;
-    private int direction;
-    private Timer timer;
+    private ArrayList<Bullet> bullets;
+    private Player[] players;    
     private Brick[] bricks;
     private Water[] water;
-    private Stone[] stone;
-    private int dir;
-    private ArrayList<Bullet> bullets;
-    private boolean status = false;
+    private Stone[] stone;    
+    private Timer timer;
     private AffineTransform transform;
-    private ImageIcon tilemap = new ImageIcon("images/tilemap.jpg");
-    private ImageIcon background = new ImageIcon("images/background.jpg");
+    private ImageIcon tilemap;
+    private ImageIcon background;
 
     public GamePanel() {
-        transform = new AffineTransform();
-        setBackground(Color.BLACK);
+        this.transform = new AffineTransform();
+        this.background = new ImageIcon("images/background.jpg");
+        this.tilemap = new ImageIcon("images/tilemap.jpg");
         setDoubleBuffered(true);
     }
 
@@ -53,7 +52,7 @@ public class GamePanel extends JPanel implements ActionListener {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(background.getImage(), 0, 0, this);
-        g2d.drawImage(tilemap.getImage(), 0, 0, this);
+        g2d.drawImage(tilemap.getImage(), 50, 50, this);
         drawMap(g);
         drawPlayers(g);
         drawCoinPiles(g);
@@ -71,7 +70,6 @@ public class GamePanel extends JPanel implements ActionListener {
         this.coins = coins;
         this.lifePacks = lifePacks;
         this.bullets = bullets;
-        status = true;
         timer = new Timer(25, this);
         timer.start();
     }
@@ -82,17 +80,17 @@ public class GamePanel extends JPanel implements ActionListener {
             x = bricks[i].getX();
             y = bricks[i].getY();
             if(bricks[i].isVisible())
-                g2d.drawImage(bricks[i].getBrick().getImage(), x, y, this);
+                g2d.drawImage(bricks[i].getBrick().getImage(), x+Constants.PIXEL_OFFSET_X, y+Constants.PIXEL_OFFSET_Y, this);
         }
         for (int i = 0; i < stone.length; i++) {
             x = stone[i].getX();
             y = stone[i].getY();
-            g2d.drawImage(stone[i].getStone().getImage(), x, y, this);
+            g2d.drawImage(stone[i].getStone().getImage(), x+Constants.PIXEL_OFFSET_X, y+Constants.PIXEL_OFFSET_Y, this);
         }
         for (int i = 0; i < water.length; i++) {
             x = water[i].getX();
             y = water[i].getY();
-            g2d.drawImage(water[i].getWater().getImage(), x, y, this);
+            g2d.drawImage(water[i].getWater().getImage(), x+Constants.PIXEL_OFFSET_X, y+Constants.PIXEL_OFFSET_Y, this);
         }
 
     }
@@ -104,11 +102,11 @@ public class GamePanel extends JPanel implements ActionListener {
             Player p = players[i];
             
             if(p.isVisible()){
-                x = p.getNextX();
-                y = p.getNextY();
-                direction = p.getDirection();
+                x = p.getNextX()+Constants.PIXEL_OFFSET_X;
+                y = p.getNextY()+Constants.PIXEL_OFFSET_Y;
+                //int direction = p.getDirection();
 
-                dir = p.getCurrentDirn();
+                //int dir = p.getCurrentDirn();
                 rotation = p.getRotation();
                 transform.setToTranslation(x, y);
                 transform.rotate(Math.toRadians(rotation), 12.5, 12.5);
@@ -123,7 +121,7 @@ public class GamePanel extends JPanel implements ActionListener {
         for (int i = 0; i < coins.size(); i++) {
             x = coins.get(i).getX();
             y = coins.get(i).getY();
-            g2d.drawImage(coins.get(i).getCoin().getImage(), x, y, this);
+            g2d.drawImage(coins.get(i).getCoin().getImage(), x+Constants.PIXEL_OFFSET_X, y+Constants.PIXEL_OFFSET_Y, this);
         }
     }
 
@@ -133,7 +131,7 @@ public class GamePanel extends JPanel implements ActionListener {
         for (int i = 0; i < lifePacks.size(); i++) {
             x = lifePacks.get(i).getX();
             y = lifePacks.get(i).getY();
-            g2d.drawImage(lifePacks.get(i).getLife().getImage(), x, y, this);
+            g2d.drawImage(lifePacks.get(i).getLife().getImage(), x+Constants.PIXEL_OFFSET_X, y+Constants.PIXEL_OFFSET_Y, this);
         }
     }  
     
@@ -144,8 +142,8 @@ public class GamePanel extends JPanel implements ActionListener {
         for (int i = 0; i < bullets.size(); i++) {
 
             bulletDirn = bullets.get(i).getDirection();
-            x = bullets.get(i).getX();
-            y = bullets.get(i).getY();
+            x = bullets.get(i).getX()+Constants.PIXEL_OFFSET_X;
+            y = bullets.get(i).getY()+Constants.PIXEL_OFFSET_Y;
 
             if (bulletDirn == 0 && bullets.get(i).isVisible()) {
                 g2d.drawImage(bullets.get(i).getBullet().getImage(), x, y, this);
@@ -332,6 +330,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 players[i].setVisible(false);
         }
     }
+    
     @Override
     public void actionPerformed(ActionEvent e) {        
         removeObjects();
@@ -340,7 +339,18 @@ public class GamePanel extends JPanel implements ActionListener {
         movePlayers();
         ditectCollisions();
         updateBricks();
+        updateScores();
         repaint();
+    }
+    
+    public void updateScores() {
+        int[][] scores = new int[players.length][3];
+        for(int i = 0; i < players.length; ++i){
+            scores[i][0] = Integer.parseInt(players[i].getName().substring(1));
+            scores[i][1] = players[i].getScore();
+            scores[i][2] = players[i].getDamage();
+            ScoreBoard.updateScores(scores, players.length);
+        }
     }
 }
 

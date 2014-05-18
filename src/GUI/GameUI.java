@@ -4,6 +4,9 @@
  */
 package GUI;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.JFrame;
 
 /**
@@ -13,20 +16,37 @@ import javax.swing.JFrame;
 public class GameUI extends JFrame {
 
     private GamePanel gameInterface;
+    private ScoreBoard scoreBoard;
 
     public GameUI() {
-        gameInterface = new GamePanel();
+        this.gameInterface = new GamePanel();        
+        setupScoreBoard();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1024, 700);
         setLocationRelativeTo(null);
         setTitle("Tank Battle");
         setResizable(false);
         setVisible(true);
+        
         add(gameInterface);
+        add(scoreBoard, BorderLayout.EAST);
 
+    }
+    
+    private void setupScoreBoard(){
+        this.scoreBoard = new ScoreBoard();
+        this.scoreBoard.setBackground(Color.CYAN);
+        this.scoreBoard.setMaximumSize(new Dimension(424, 302));
+        this.scoreBoard.setSize(424, 302);
+        this.scoreBoard.setAlignmentY(50.0f);
+        this.scoreBoard.setAlignmentX(600.0f);
     }
 
     public GamePanel getGameInterface() {
         return this.gameInterface;
     }
+
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
+    }    
 }
