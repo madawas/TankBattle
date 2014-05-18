@@ -48,17 +48,17 @@ public class GUI extends JPanel implements ActionListener {
     }
 
     @Override
-    public void paint(Graphics graphic) {
-        super.paint(graphic);
-        Graphics2D g2d = (Graphics2D) graphic;
+    public void paint(Graphics g) {
+        super.paint(g);
+        Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(background.getImage(), 0, 0, this);
-        drawMap(graphic);
-        drawPlayers(graphic);
-        drawCoinPiles(graphic);
-        drawLifePacks(graphic);
-        drawBullets(graphic);
+        drawMap(g);
+        drawPlayers(g);
+        drawCoinPiles(g);
+        drawLifePacks(g);
+        drawBullets(g);
         Toolkit.getDefaultToolkit().sync();
-        graphic.dispose();
+        g.dispose();
     }
 
     public void initialize(Brick[] bricks, Water[] water, Stone[] stones, Player[] player, ArrayList<CoinPile> coins, ArrayList<LifePack> lifePacks, ArrayList<Bullet> bullets) {
@@ -73,30 +73,31 @@ public class GUI extends JPanel implements ActionListener {
         timer = new Timer(25, this);
         timer.start();
     }
-    
-    public void drawMap(Graphics graphic) {
-        Graphics2D g = (Graphics2D) graphic;
+
+    public void drawMap(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
         for (int i = 0; i < bricks.length; i++) {
             x = bricks[i].getX();
             y = bricks[i].getY();
-            g.drawImage(bricks[i].getBrick().getImage(), x, y, this);
+            if(bricks[i].isVisible())
+                g2d.drawImage(bricks[i].getBrick().getImage(), x, y, this);
         }
         for (int i = 0; i < stone.length; i++) {
             x = stone[i].getX();
             y = stone[i].getY();
-            g.drawImage(stone[i].getStone().getImage(), x, y, this);
+            g2d.drawImage(stone[i].getStone().getImage(), x, y, this);
         }
         for (int i = 0; i < water.length; i++) {
             x = water[i].getX();
             y = water[i].getY();
-            g.drawImage(water[i].getWater().getImage(), x, y, this);
+            g2d.drawImage(water[i].getWater().getImage(), x, y, this);
         }
 
     }
 
-    public void drawPlayers(Graphics graphic) {
+    public void drawPlayers(Graphics g) {
         int rotation;
-        Graphics2D g2d = (Graphics2D) graphic;
+        Graphics2D g2d = (Graphics2D) g;
         for (int i = 0; i < players.length; i++) {
             x = players[i].getNextX();
             y = players[i].getNextY();
@@ -128,24 +129,55 @@ public class GUI extends JPanel implements ActionListener {
             y = lifePacks.get(i).getY();
             g2d.drawImage(lifePacks.get(i).getLife().getImage(), x, y, this);
         }
+    }  
+    
+    public void drawBullets(Graphics g) {
+        int bulletDirn;
+        Graphics2D g2d = (Graphics2D) g;
+
+        for (int i = 0; i < bullets.size(); i++) {
+
+            bulletDirn = bullets.get(i).getDirection();
+            x = bullets.get(i).getX();
+            y = bullets.get(i).getY();
+
+            if (bulletDirn == 0 && bullets.get(i).isVisible()) {
+                g2d.drawImage(bullets.get(i).getBullet().getImage(), x, y, this);
+            } else if (bulletDirn == 1 && bullets.get(i).isVisible()) {
+                transform.setToTranslation(x, y);
+                transform.rotate(Math.toRadians(90), 12.5, 12.5);
+                g2d.drawImage(bullets.get(i).getBullet().getImage(), transform, this);
+            } else if (bulletDirn == 2 && bullets.get(i).isVisible()) {
+                transform.setToTranslation(x, y);
+                transform.rotate(Math.toRadians(180), 12.5, 12.5);
+                g2d.drawImage(bullets.get(i).getBullet().getImage(), transform, this);
+            } else if (bulletDirn == 3 && bullets.get(i).isVisible()) {
+                transform.setToTranslation(x, y);
+                transform.rotate(Math.toRadians(270), 12.5, 12.5);
+                g2d.drawImage(bullets.get(i).getBullet().getImage(), transform, this);
+            }
+        }
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        timeExpireObject();
-        collectObjects();
-        moveBullets();
-        movePlayers();
-        ditectCollisions();
-        repaint();
+    public void moveBullets() {
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).move();
+        }
     }
 
-    public void timeExpireObject() {
+    public void movePlayers() {
+        for (int i = 0; i < players.length; i++) {
+            players[i].move();
+            players[i].rotateImage();
+        }
+    }
+    
+    public void removeObjects() {
         long currentTime = System.currentTimeMillis();
         long timeToExpire;
         long lifePackTime;
         long coinPileTime;
-        
+
         if (lifePacks != null) {
             for (int i = 0; i < lifePacks.size(); i++) {
                 timeToExpire = currentTime - lifePacks.get(i).getInitiateTime();
@@ -174,7 +206,7 @@ public class GUI extends JPanel implements ActionListener {
         int objectY;
         int playerX;
         int playerY;
-        
+
         //coin collect
         if (coins != null) {
             for (int i = 0; i < coins.size(); i++) {
@@ -192,7 +224,7 @@ public class GUI extends JPanel implements ActionListener {
                 }
             }
         }
-        
+
         //lifepack collect
         for (int i = 0; i < lifePacks.size(); i++) {
             objectX = lifePacks.get(i).getX();
@@ -209,8 +241,8 @@ public class GUI extends JPanel implements ActionListener {
                 }
             }
         }
-    }
-
+    }    
+    
     public void ditectCollisions() {
         Rectangle bullet, object;
         //bullet hit stone
@@ -228,15 +260,15 @@ public class GUI extends JPanel implements ActionListener {
             }
             //bullet hit player
             /*for (int j = 0; j < players.length; j++) {
-                object = players[j].getRectangle();
-                if (bullet.intersects(object) && bullets.get(i).getShootBy() != j) {
+             object = players[j].getRectangle();
+             if (bullet.intersects(object) && bullets.get(i).getShootBy() != j) {
 
-                    if (bullets.size() > 0) {
-                        bullets.remove(i);
-                        i = i - 1;
-                    }
-                }
-            }*/
+             if (bullets.size() > 0) {
+             bullets.remove(i);
+             i = i - 1;
+             }
+             }
+             }*/
             //bullet hit brick
             for (int j = 0; j < bricks.length; j++) {
                 object = bricks[j].getRectangle();
@@ -260,45 +292,44 @@ public class GUI extends JPanel implements ActionListener {
         }
 
     }
-
-    public void drawBullets(Graphics graphic) {
-        int bulletDirn;
-        Graphics2D g2d = (Graphics2D) graphic;
+    
+    public void updateBricks() {
+        int damage;
         
-        for (int i = 0; i < bullets.size(); i++) {
-            
-            bulletDirn = bullets.get(i).getDirection();
-            x = bullets.get(i).getX();
-            y = bullets.get(i).getY();
-            
-            if (bulletDirn == 0 && bullets.get(i).isVisible()) {
-                g2d.drawImage(bullets.get(i).getBullet().getImage(), x, y, this);                
-            } else if (bulletDirn == 1 && bullets.get(i).isVisible()) {
-                transform.setToTranslation(x, y);
-                transform.rotate(Math.toRadians(90), 12.5, 12.5);
-                g2d.drawImage(bullets.get(i).getBullet().getImage(), transform, this);
-            } else if (bulletDirn == 2 && bullets.get(i).isVisible()) {
-                transform.setToTranslation(x, y);
-                transform.rotate(Math.toRadians(180), 12.5, 12.5);
-                g2d.drawImage(bullets.get(i).getBullet().getImage(), transform, this);
-            } else if (bulletDirn == 3 && bullets.get(i).isVisible()) {
-                transform.setToTranslation(x, y);
-                transform.rotate(Math.toRadians(270), 12.5, 12.5);
-                g2d.drawImage(bullets.get(i).getBullet().getImage(), transform, this);
+        for(int i = 0; i < bricks.length; i++) {
+            Brick brick = bricks[i];
+            damage = brick.getDamage();            
+            switch(damage){
+                case 0:
+                    break;
+                case 1:
+                    brick.setBrickImage("images/brick25.png");
+                    break;
+                case 2:
+                    brick.setBrickImage("images/brick50.png");
+                    break;
+                case 3:
+                    brick.setBrickImage("images/brick75.png");
+                    break;
+                case 4:
+                    brick.setVisible(false);
+                    break;
+                default:
+                    break;
             }
         }
     }
     
-    public void moveBullets() {
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).move();
-        }
-    }
-
-    public void movePlayers() {
-        for (int i = 0; i < players.length; i++) {
-            players[i].move();
-            players[i].rotateImage();
-        }
+    @Override
+    public void actionPerformed(ActionEvent e) {        
+        removeObjects();
+        collectObjects();
+        moveBullets();
+        movePlayers();
+        ditectCollisions();
+        updateBricks();
+        repaint();
     }
 }
+
+

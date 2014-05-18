@@ -121,13 +121,13 @@ public class AI extends Thread {
             coinX = coins.get(0).getX() / 25;
             coinY = coins.get(0).getY() / 25;
         }
-        System.out.println(xx + "aww" + yy);
+        //System.out.println(xx + "aww" + yy);
         this.getMaze().setGoal(xx, yy);
-        System.out.println("GOAL=" + xx + "and" + yy);
+        //System.out.println("GOAL=" + xx + "and" + yy);
         xx = getPlayerLocationX(DataHandler.player) / 25;
         yy = getPlayerLocationY(DataHandler.player) / 25;
         temp = new Player("Temp", xx, yy, 0, false, players[DataHandler.player].getDirection(),"images/tanks/tank0.png");
-        System.out.println("TARGET" + xx + "awwwww" + yy);
+        //System.out.println("TARGET" + xx + "awwwww" + yy);
         bestListCoins = this.getMaze().findBestPath(xx, yy);
         follow();
     }
@@ -143,7 +143,7 @@ public class AI extends Thread {
             direction = getPlayerDirection(DataHandler.player);
             if (playerX == bestListCoins.get(bestListCoins.size() - 1).getX() && (playerY + 1) == bestListCoins.get(bestListCoins.size() - 1).getY()) {
                 if (!detectCollision(playerX, playerY + 1)) {
-                    System.out.println(bestListCoins.size() + "checkD");
+                    //System.out.println(bestListCoins.size() + "checkD");
                     down(direction);
                     temp.setX(playerX);
                     temp.setY(playerY + 1);
@@ -152,7 +152,7 @@ public class AI extends Thread {
                 }
             } else if (playerX == bestListCoins.get(bestListCoins.size() - 1).getX() && (playerY - 1) == bestListCoins.get(bestListCoins.size() - 1).getY()) {
                 if (!detectCollision(playerX, playerY - 1)) {
-                    System.out.println(bestListCoins.size() + "checkU");
+                    //System.out.println(bestListCoins.size() + "checkU");
                     up(direction);
                     temp.setX(playerX);
                     temp.setY(playerY - 1);
@@ -161,7 +161,7 @@ public class AI extends Thread {
                 }
             } else if ((playerX + 1) == bestListCoins.get(bestListCoins.size() - 1).getX() && playerY == bestListCoins.get(bestListCoins.size() - 1).getY()) {
                 if (!detectCollision(playerX + 1, playerY)) {
-                    System.out.println(bestListCoins.size() + "checkR");
+                    //System.out.println(bestListCoins.size() + "checkR");
                     right(direction);
                     temp.setX(playerX + 1);
                     temp.setY(playerY);
@@ -170,7 +170,7 @@ public class AI extends Thread {
                 }
             } else if ((playerX - 1) == bestListCoins.get(bestListCoins.size() - 1).getX() && playerY == bestListCoins.get(bestListCoins.size() - 1).getY()) {
                 if (!detectCollision(playerX - 1, playerY)) {
-                    System.out.println(bestListCoins.size() + "checkL");
+                    //System.out.println(bestListCoins.size() + "checkL");
                     left(direction);
                     temp.setX(playerX - 1);
                     temp.setY(playerY);
@@ -180,7 +180,7 @@ public class AI extends Thread {
             } else {
                 return;
             }
-            System.out.println("sizeOfit=" + bestListCoins.size());
+            //System.out.println("sizeOfit=" + bestListCoins.size());
         }
         write.writeCommand("SHOOT#");
         bestListCoins = null;
@@ -263,7 +263,7 @@ public class AI extends Thread {
         for (int i = 0; i < players.length - 1; i++) {
             if ((x == players[i].getNextX() / 25 && y == players[i].getNextY() / 25) || (x == players[i].getX() / 25 && y == players[i].getY() / 25)) {
                 status1 = true;
-                System.out.println("COLLISION DETECTED");
+                //System.out.println("COLLISION DETECTED");
             }
         }
         return status1;

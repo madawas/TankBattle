@@ -38,7 +38,7 @@ public class DataHandler {
     public void parseMessage(String s) {
         String[] temp;
         String[] temp2;
-        int x,y,lifeTime,value,direction,coin,health,brickHealth;
+        int x,y,lifeTime,value,direction,coin,health,brickDamage;
         long timeInit;
         String name;
         boolean shoot;
@@ -129,9 +129,8 @@ public class DataHandler {
             
             temp2 = temp[players.length + 1].split("[;#]");
             for (int i = 0; i < bricks.length; i++) {
-                Brick brick = bricks[i];
-                brickHealth = Integer.parseInt(temp2[i].split(",")[2]);
-                brick.setDamage(brickHealth);
+                brickDamage = Integer.parseInt(temp2[i].split(",")[2]);
+                bricks[i].setDamage(brickDamage);
             }
         }
         //Coin message parsing

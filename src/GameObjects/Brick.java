@@ -28,6 +28,7 @@ public class Brick {
         this.y = y;
         this.damage = damage;
         brick = new ImageIcon(brickImage);
+        this.visible = true;
     }
 
     public int getX() {
