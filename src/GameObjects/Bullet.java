@@ -18,7 +18,7 @@ public class Bullet {
     private boolean visible;
     private int direction;
     private int MISSILE_SPEED = 5;
-    private String bulletImage = "bullet.png";
+    private String bulletImage = "images/bullet.png";
     private int imageX;
     private int imageY;
     private Rectangle rec;

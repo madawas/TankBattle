@@ -16,7 +16,7 @@ public class Brick {
     private int x;
     private int y;
     private int damage;
-    private String brickLocation = "bricks.jpg";
+    private String brickImage = "images/brick.png";
     private ImageIcon brick;
     private Rectangle rectangle;
     private int imageX;
@@ -27,82 +27,49 @@ public class Brick {
         this.x = x;
         this.y = y;
         this.damage = damage;
-        brick = new ImageIcon(brickLocation);
+        brick = new ImageIcon(brickImage);
     }
 
-    /**
-     * @return the x
-     */
     public int getX() {
         return x;
     }
 
-    /**
-     * @param x the x to set
-     */
     public void setX(int x) {
         this.x = x;
     }
 
-    /**
-     * @return the y
-     */
     public int getY() {
         return y;
     }
 
-    /**
-     * @param y the y to set
-     */
     public void setY(int y) {
         this.y = y;
     }
 
-    /**
-     * @return the damage
-     */
     public int getDamage() {
         return damage;
     }
 
-    /**
-     * @param damage the damage to set
-     */
     public void setDamage(int damage) {
         this.damage = damage;
     }
 
-    /**
-     * @return the brick
-     */
     public ImageIcon getBrick() {
         return brick;
     }
 
-    /**
-     * @param brick the brick to set
-     */
     public void setBrick(ImageIcon brick) {
         this.brick = brick;
     }
 
-    /**
-     * @return the brickLocation
-     */
-    public String getBrickLocation() {
-        return brickLocation;
+    public String getBrickImage() {
+        return brickImage;
     }
 
-    /**
-     * @param brickLocation the brickLocation to set
-     */
-    public void setBrickLocation(String brickLocation) {
-        this.brickLocation = brickLocation;
+    public void setBrickImage(String brickImage) {
+        this.brickImage = brickImage;
     }
 
-    /**
-     * @return the rec
-     */
     public Rectangle getRectangle() {
         imageX = this.getBrick().getImage().getWidth(null);
         imageY = this.getBrick().getImage().getHeight(null);
@@ -110,23 +77,14 @@ public class Brick {
         return rectangle;
     }
 
-    /**
-     * @param rectangle the rec to set
-     */
     public void setRectangle(Rectangle rectangle) {
         this.rectangle = rectangle;
     }
 
-    /**
-     * @return the visible
-     */
     public boolean isVisible() {
         return visible;
     }
 
-    /**
-     * @param visible the visible to set
-     */
     public void setVisible(boolean visible) {
         this.visible = visible;
     }

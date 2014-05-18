@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GameObjects;
 
 import java.awt.Rectangle;
@@ -10,23 +9,25 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Harsha
+ * @author Madawa
  */
 public class LifePack {
-private int x,y;
-private ImageIcon life;
-private int lifeTime;
-private long initiateTime;
-private String location="life.jpg";
+
+    private int x, y;
+    private ImageIcon life;
+    private int lifeTime;
+    private long initiateTime;
+    private String location = "images/life.jpg";
     private int imageX;
     private int imageY;
     private Rectangle rec;
+
     public LifePack(int x, int y, int lifeTime, long initiateTime) {
         this.x = x;
         this.y = y;
         this.lifeTime = lifeTime;
         this.initiateTime = initiateTime;
-        life=new ImageIcon(location);
+        life = new ImageIcon(location);
     }
 
     /**
@@ -112,12 +113,11 @@ private String location="life.jpg";
     public void setLocation(String location) {
         this.location = location;
     }
-        public Rectangle getRec()
-        {
-        imageX=this.getLife().getImage().getWidth(null);
-        imageY=this.getLife().getImage().getHeight(null);
-        rec=new Rectangle(x,y,imageX,imageY);
+
+    public Rectangle getRec() {
+        imageX = this.getLife().getImage().getWidth(null);
+        imageY = this.getLife().getImage().getHeight(null);
+        rec = new Rectangle(x, y, imageX, imageY);
         return rec;
-        }
-    
+    }
 }

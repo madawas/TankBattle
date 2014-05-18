@@ -20,7 +20,7 @@ public class Player {
     private boolean alive;
     private boolean shoot;
     private int rotation;
-    private String tankImage = "tank.png";
+    private String tankImage = "images/tank.png";
     private int imageX;
     private int imageY;
     private Rectangle rec;

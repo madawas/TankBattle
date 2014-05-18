@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GameObjects;
 
 import java.awt.Rectangle;
@@ -10,12 +9,13 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Harsha
+ * @author Madawa
  */
 public class Water {
+
     private int x;
     private int y;
-    private String location="water.jpg";
+    private String location = "images/water.jpg";
     private ImageIcon water;
     private int imageX;
     private int imageY;
@@ -24,9 +24,9 @@ public class Water {
     public Water(int x, int y) {
         this.x = x;
         this.y = y;
-        water=new ImageIcon(location);
+        water = new ImageIcon(location);
     }
-    
+
     /**
      * @return the x
      */
@@ -82,11 +82,11 @@ public class Water {
     public void setLocation(String location) {
         this.location = location;
     }
-        public Rectangle getRec()
-        {
-        imageX=this.getWater().getImage().getWidth(null);
-        imageY=this.getWater().getImage().getHeight(null);
-        rec=new Rectangle(x,y,imageX,imageY);
+
+    public Rectangle getRec() {
+        imageX = this.getWater().getImage().getWidth(null);
+        imageY = this.getWater().getImage().getHeight(null);
+        rec = new Rectangle(x, y, imageX, imageY);
         return rec;
-        }
+    }
 }

@@ -14,8 +14,8 @@ public class Constants {
     
     private static String host = null;
     private static int readPort = -1;
-    private static int writePort = -1; 
-
+    private static int writePort = -1;
+    
     public static String getHost() {
         if(host != null)
             return host;

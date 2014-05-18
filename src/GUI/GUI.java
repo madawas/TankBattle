@@ -39,7 +39,7 @@ public class GUI extends JPanel implements ActionListener {
     private ArrayList<Bullet> bullets;
     private boolean status = false;
     private AffineTransform transform;
-    private ImageIcon background = new ImageIcon("game.jpg");
+    private ImageIcon background = new ImageIcon("images/game.jpg");
 
     public GUI() {
         transform = new AffineTransform();
@@ -93,9 +93,9 @@ public class GUI extends JPanel implements ActionListener {
 
     }
 
-    public void drawPlayers(Graphics g) {
+    public void drawPlayers(Graphics graphic) {
         int rotation;
-        Graphics2D g2d = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D) graphic;
         for (int i = 0; i < players.length; i++) {
             x = players[i].getNextX();
             y = players[i].getNextY();
@@ -210,13 +210,13 @@ public class GUI extends JPanel implements ActionListener {
     }
 
     public void ditectCollisions() {
-        Rectangle one, two;
+        Rectangle bullet, object;
         //bullet hit stone
         for (int i = 0; i < bullets.size(); i++) {
-            one = bullets.get(i).getRec();
+            bullet = bullets.get(i).getRec();
             for (int j = 0; j < stone.length; j++) {
-                two = stone[j].getRec();
-                if (one.intersects(two)) {
+                object = stone[j].getRec();
+                if (bullet.intersects(object)) {
 
                     if (bullets.size() > 0) {
                         bullets.remove(i);
@@ -225,20 +225,20 @@ public class GUI extends JPanel implements ActionListener {
                 }
             }
             //bullet hit player
-            for (int j = 0; j < players.length; j++) {
-                two = players[j].getRectangle();
-                if (one.intersects(two) && bullets.get(i).getShootBy() != j) {
+            /*for (int j = 0; j < players.length; j++) {
+                object = players[j].getRectangle();
+                if (bullet.intersects(object) && bullets.get(i).getShootBy() != j) {
 
                     if (bullets.size() > 0) {
                         bullets.remove(i);
                         i = i - 1;
                     }
                 }
-            }
+            }*/
             //bullet hit brick
             for (int j = 0; j < bricks.length; j++) {
-                two = bricks[j].getRectangle();
-                if (one.intersects(two)) {
+                object = bricks[j].getRectangle();
+                if (bullet.intersects(object)) {
 
                     if (bullets.size() > 0) {
                         bullets.remove(i);
@@ -259,26 +259,27 @@ public class GUI extends JPanel implements ActionListener {
 
     }
 
-    public void drawBullets(Graphics g) {
-        int bDirection;
-        Graphics2D g2d = (Graphics2D) g;
+    public void drawBullets(Graphics graphic) {
+        int bulletDirn;
+        Graphics2D g2d = (Graphics2D) graphic;
+        
         for (int i = 0; i < bullets.size(); i++) {
-            bDirection = bullets.get(i).getDirection();
+            
+            bulletDirn = bullets.get(i).getDirection();
             x = bullets.get(i).getX();
             y = bullets.get(i).getY();
-            if (bDirection == 0 && bullets.get(i).isVisible()) {
-                g2d.drawImage(bullets.get(i).getBullet().getImage(), x, y, this);
-                
-            } else if (bDirection == 1 && bullets.get(i).isVisible()) {
-
+            
+            if (bulletDirn == 0 && bullets.get(i).isVisible()) {
+                g2d.drawImage(bullets.get(i).getBullet().getImage(), x, y, this);                
+            } else if (bulletDirn == 1 && bullets.get(i).isVisible()) {
                 transform.setToTranslation(x, y);
                 transform.rotate(Math.toRadians(90), 12.5, 12.5);
                 g2d.drawImage(bullets.get(i).getBullet().getImage(), transform, this);
-            } else if (bDirection == 2 && bullets.get(i).isVisible()) {
+            } else if (bulletDirn == 2 && bullets.get(i).isVisible()) {
                 transform.setToTranslation(x, y);
                 transform.rotate(Math.toRadians(180), 12.5, 12.5);
                 g2d.drawImage(bullets.get(i).getBullet().getImage(), transform, this);
-            } else if (bDirection == 3 && bullets.get(i).isVisible()) {
+            } else if (bulletDirn == 3 && bullets.get(i).isVisible()) {
                 transform.setToTranslation(x, y);
                 transform.rotate(Math.toRadians(270), 12.5, 12.5);
                 g2d.drawImage(bullets.get(i).getBullet().getImage(), transform, this);

@@ -16,7 +16,7 @@ public class Stone {
     private int x;
     private int y;
     private ImageIcon stone;
-    private String location="stone.jpg";
+    private String location="images/stone.jpg";
     private int imageX;
     private int imageY;
     private Rectangle rec;

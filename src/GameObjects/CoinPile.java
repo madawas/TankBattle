@@ -18,7 +18,7 @@ private ImageIcon coin;
 private int value;
 private int lifeTime;
 private long initiateTime;
-private String coinLocation="coins.png";
+private String coinLocation="images/coin.gif";
 private int imageX;
 private int imageY;
 private Rectangle rec;
