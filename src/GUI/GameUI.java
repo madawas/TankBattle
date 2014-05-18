@@ -12,12 +12,12 @@ import javax.swing.JFrame;
  */
 public class GameUI extends JFrame {
 
-    private GUI gameInterface;
+    private GamePanel gameInterface;
 
     public GameUI() {
-        gameInterface = new GUI();
+        gameInterface = new GamePanel();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(1024, 700);
         setLocationRelativeTo(null);
         setTitle("Tank Battle");
         setResizable(false);
@@ -26,7 +26,7 @@ public class GameUI extends JFrame {
 
     }
 
-    public GUI getGameInterface() {
+    public GamePanel getGameInterface() {
         return this.gameInterface;
     }
 }

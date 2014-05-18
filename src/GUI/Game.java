@@ -12,10 +12,10 @@ import javax.swing.JFrame;
  * @author Harsha
  */
 public class Game extends JFrame {
-private GUI gui;
+private GamePanel gui;
     public Game()
     {
-        gui=new GUI();
+        gui=new GamePanel();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(510, 535);
         setLocationRelativeTo(null);
@@ -25,7 +25,7 @@ private GUI gui;
         add(gui);
        
     }
-    public GUI getGuiInstance()
+    public GamePanel getGuiInstance()
     {
         return this.gui;
     }

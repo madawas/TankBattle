@@ -19,6 +19,7 @@ public class Player {
     private ImageIcon north;
     private boolean alive;
     private boolean shoot;
+    private boolean visible;
     private int rotation;
     private String playerImage;
     private int imageX;
@@ -32,7 +33,7 @@ public class Player {
     private int rotation270;
     private int rotation0;
 
-    public Player(String name, int x, int y, int damage, boolean shoot, int direction,String playerImage) {
+    public Player(String name, int x, int y, int damage, boolean shoot, int direction, String playerImage) {
         this.name = name;
         this.x = x;
         this.y = y;
@@ -44,6 +45,7 @@ public class Player {
         this.playerImage = playerImage;
         north = new ImageIcon(playerImage);
         this.direction = direction;
+        this.visible = true;
     }
 
     public void setRDirection() {
@@ -234,6 +236,14 @@ public class Player {
         this.rotation = rotation;
     }
 
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+    
     public void diffOne(int dif) {
         if (dif == 1 && currentDirn == 0 && rotation0 <= 90) {
             rotation = rotation0;

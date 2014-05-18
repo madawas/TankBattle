@@ -24,7 +24,7 @@ import javax.swing.ImageIcon;
  *
  * @author Madawa
  */
-public class GUI extends JPanel implements ActionListener {
+public class GamePanel extends JPanel implements ActionListener {
 
     private ArrayList<CoinPile> coins;
     private ArrayList<LifePack> lifePacks;
@@ -39,9 +39,10 @@ public class GUI extends JPanel implements ActionListener {
     private ArrayList<Bullet> bullets;
     private boolean status = false;
     private AffineTransform transform;
-    private ImageIcon background = new ImageIcon("images/game.jpg");
+    private ImageIcon tilemap = new ImageIcon("images/tilemap.jpg");
+    private ImageIcon background = new ImageIcon("images/background.jpg");
 
-    public GUI() {
+    public GamePanel() {
         transform = new AffineTransform();
         setBackground(Color.BLACK);
         setDoubleBuffered(true);
@@ -52,6 +53,7 @@ public class GUI extends JPanel implements ActionListener {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(background.getImage(), 0, 0, this);
+        g2d.drawImage(tilemap.getImage(), 0, 0, this);
         drawMap(g);
         drawPlayers(g);
         drawCoinPiles(g);
@@ -99,15 +101,19 @@ public class GUI extends JPanel implements ActionListener {
         int rotation;
         Graphics2D g2d = (Graphics2D) g;
         for (int i = 0; i < players.length; i++) {
-            x = players[i].getNextX();
-            y = players[i].getNextY();
-            direction = players[i].getDirection();
+            Player p = players[i];
+            
+            if(p.isVisible()){
+                x = p.getNextX();
+                y = p.getNextY();
+                direction = p.getDirection();
 
-            dir = players[i].getCurrentDirn();
-            rotation = players[i].getRotation();
-            transform.setToTranslation(x, y);
-            transform.rotate(Math.toRadians(rotation), 12.5, 12.5);
-            g2d.drawImage(players[i].getNorth().getImage(), transform, this);
+                dir = p.getCurrentDirn();
+                rotation = p.getRotation();
+                transform.setToTranslation(x, y);
+                transform.rotate(Math.toRadians(rotation), 12.5, 12.5);
+                g2d.drawImage(p.getNorth().getImage(), transform, this);
+            }
         }
     }
 
@@ -298,7 +304,7 @@ public class GUI extends JPanel implements ActionListener {
         
         for(int i = 0; i < bricks.length; i++) {
             Brick brick = bricks[i];
-            damage = brick.getDamage();            
+            damage = brick.getDamage();
             switch(damage){
                 case 0:
                     break;
@@ -320,6 +326,12 @@ public class GUI extends JPanel implements ActionListener {
         }
     }
     
+    public void removeDeadPlayers() {
+        for(int i = 0; i < players.length; i++) {
+            if(!players[i].isAlive())
+                players[i].setVisible(false);
+        }
+    }
     @Override
     public void actionPerformed(ActionEvent e) {        
         removeObjects();

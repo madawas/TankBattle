@@ -17,7 +17,7 @@ public class LifePack {
     private ImageIcon life;
     private int lifeTime;
     private long initiateTime;
-    private String location = "images/life.jpg";
+    private String location = "images/lifepack.gif";
     private int imageX;
     private int imageY;
     private Rectangle rec;
