@@ -37,16 +37,10 @@ public class DataHandler {
     public void addDetails(String s) {
         String[] temp;
         String[] temp2;
-        int x;
-        int y;
-        int lifeTime;
+        int x,y,lifeTime,value,direction,coin,health,brickHealth;
         long timeInit;
-        int value;
-        int direction;
         String name;
         boolean shoot;
-        int coin;
-        int health;
         
         //Initializing Message parsing
         if (s.split(":")[0].equalsIgnoreCase("I")) { //If I message
@@ -86,7 +80,7 @@ public class DataHandler {
             }
             
             gameInterface = new GameUI();
-            gameInterface.getGuiInstance().initialize(bricks, water, stones, players, coins, lifePacks, bullets);
+            gameInterface.getGameInterface().initialize(bricks, water, stones, players, coins, lifePacks, bullets);
             ai = new AI(coins, lifePacks, players, bricks, water, stones, bullets);
             ai.generateSqures();
             ai.createAdjecencies();
@@ -103,6 +97,7 @@ public class DataHandler {
                 x = Integer.parseInt(temp[i + 1].split(";")[1].split(",")[0]) * 25;
                 y = Integer.parseInt(temp[i + 1].split(";")[1].split(",")[1]) * 25;
                 direction = Integer.parseInt(temp[i + 1].split(";")[2]);
+                
                 if (Integer.parseInt(temp[i + 1].split(";")[3]) == 0) {
                     shoot = false;
                 } else {
@@ -113,34 +108,43 @@ public class DataHandler {
                     bullets.add(bullet);
 
                 }
+                
                 health = Integer.parseInt(temp[i + 1].split(";")[4]);
                 coin = Integer.parseInt(temp[i + 1].split(";")[5]);
                 value = Integer.parseInt(temp[i + 1].split(";")[6]);
+                
                 players[i].setX(x);
                 players[i].setY(y);
                 players[i].setDirection(direction);
                 players[i].setShoot(shoot);
                 players[i].setDamage(health);
                 players[i].setCoins(coin);
-                players[i].setScore(coin);
+                players[i].setScore(value);
             }
+            
             temp2 = temp[players.length + 1].split("[;#]");
             for (int i = 0; i < bricks.length; i++) {
-                health = Integer.parseInt(temp2[i].split(",")[2]);
-                bricks[i].setDamage(health);
+                brickHealth = Integer.parseInt(temp2[i].split(",")[2]);
+                bricks[i].setDamage(brickHealth);
             }
         }
+        //Coin message parsing
         if (s.split(":")[0].equalsIgnoreCase("C")) {
+            
             x = Integer.parseInt(s.split(":")[1].split(",")[0]) * 25;
             y = Integer.parseInt(s.split(":")[1].split(",")[1]) * 25;
+            
             value = Integer.parseInt(s.split("[:#]")[3]);
             timeInit = System.currentTimeMillis();
             lifeTime = Integer.parseInt(s.split("[:#]")[2]);
             coins.add(new CoinPile(x, y, value, lifeTime, timeInit));
         }
+        //Life Pack message parsing
         if (s.split(":")[0].equalsIgnoreCase("L")) {
+            
             x = Integer.parseInt(s.split(":")[1].split(",")[0]) * 25;
             y = Integer.parseInt(s.split(":")[1].split(",")[1]) * 25;
+            
             lifeTime = Integer.parseInt(s.split("[:#]")[2]);
             timeInit = System.currentTimeMillis();
             lifePacks.add(new LifePack(x, y, lifeTime, timeInit));

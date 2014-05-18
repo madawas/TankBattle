@@ -9,6 +9,9 @@ public class Constants {
     private static final int DEFAULT_WRITE_PORT = 6000;    
     private static final int DEFAULT_READ_PORT = 7000;
     
+    public static final int SCREEN_WIDTH = 500;
+    public static final int SCREEN_HEIGHT = 500;
+    
     private static String host = null;
     private static int readPort = -1;
     private static int writePort = -1; 

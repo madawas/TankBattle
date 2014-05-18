@@ -2,31 +2,31 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUI;
 
 import javax.swing.JFrame;
 
 /**
  *
- * @author Harsha
+ * @author Madawa
  */
 public class GameUI extends JFrame {
-private GUI gui;
-    public GameUI()
-    {
-        gui=new GUI();
+
+    private GUI gameInterface;
+
+    public GameUI() {
+        gameInterface = new GUI();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(510, 535);
+        setSize(800, 600);
         setLocationRelativeTo(null);
-        setTitle("TankBusters");
+        setTitle("Tank Battle");
         setResizable(false);
         setVisible(true);
-        add(gui);
-      
+        add(gameInterface);
+
     }
-    public GUI getGuiInstance()
-    {
-        return this.gui;
+
+    public GUI getGameInterface() {
+        return this.gameInterface;
     }
 }

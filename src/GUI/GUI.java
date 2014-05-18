@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import java.awt.Color;
@@ -40,7 +36,7 @@ public class GUI extends JPanel implements ActionListener {
     private Water[] water;
     private Stone[] stone;
     private int dir;
-    private ArrayList<Bullet> bullet;
+    private ArrayList<Bullet> bullets;
     private boolean status = false;
     private AffineTransform transform;
     private ImageIcon background = new ImageIcon("game.jpg");
@@ -64,14 +60,14 @@ public class GUI extends JPanel implements ActionListener {
         graphic.dispose();
     }
 
-    public void initialize(Brick[] bricks, Water[] water, Stone[] stones, Player[] player, ArrayList<CoinPile> coins, ArrayList<LifePack> lifePacks, ArrayList<Bullet> bullet) {
+    public void initialize(Brick[] bricks, Water[] water, Stone[] stones, Player[] player, ArrayList<CoinPile> coins, ArrayList<LifePack> lifePacks, ArrayList<Bullet> bullets) {
         this.bricks = bricks;
         this.stone = stones;
         this.players = player;
         this.water = water;
         this.coins = coins;
         this.lifePacks = lifePacks;
-        this.bullet = bullet;
+        this.bullets = bullets;
         status = true;
         timer = new Timer(25, this);
         timer.start();
@@ -134,25 +130,25 @@ public class GUI extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        checkForTimeExpired();
-        checkForGrab();
+        timeExpireObject();
+        collectObjects();
         moveBullets();
         movePlayers();
-        //ditectCollisions();
+        ditectCollisions();
         repaint();
     }
 
-    public void checkForTimeExpired() {
-        long timeNow = System.currentTimeMillis();
-        long dif;
-        long pileTime;
-        long coinTime;
+    public void timeExpireObject() {
+        long currentTime = System.currentTimeMillis();
+        long timeToExpire;
+        long lifePackTime;
+        long coinPileTime;
+        
         if (lifePacks != null) {
             for (int i = 0; i < lifePacks.size(); i++) {
-                dif = timeNow - lifePacks.get(i).getInitiateTime();
-                pileTime = lifePacks.get(i).getLifeTime();
-                if (pileTime <= dif) {
-                    System.out.println("called");
+                timeToExpire = currentTime - lifePacks.get(i).getInitiateTime();
+                lifePackTime = lifePacks.get(i).getLifeTime();
+                if (lifePackTime <= timeToExpire) {
                     lifePacks.remove(i);
                     i = i - 1;
                 }
@@ -161,9 +157,9 @@ public class GUI extends JPanel implements ActionListener {
         }
         if (coins != null) {
             for (int i = 0; i < coins.size(); i++) {
-                dif = timeNow - coins.get(i).getInitiateTime();
-                coinTime = coins.get(i).getLifeTime();
-                if (coinTime <= dif) {
+                timeToExpire = currentTime - coins.get(i).getInitiateTime();
+                coinPileTime = coins.get(i).getLifeTime();
+                if (coinPileTime <= timeToExpire) {
                     coins.remove(i);
                     i = i - 1;
                 }
@@ -171,19 +167,21 @@ public class GUI extends JPanel implements ActionListener {
         }
     }
 
-    public void checkForGrab() {
-        int xx;
-        int yy;
-        int px;
-        int py;
+    public void collectObjects() {
+        int objectX;
+        int objectY;
+        int playerX;
+        int playerY;
+        
+        //coin collect
         if (coins != null) {
             for (int i = 0; i < coins.size(); i++) {
-                xx = coins.get(i).getX();
-                yy = coins.get(i).getY();
+                objectX = coins.get(i).getX();
+                objectY = coins.get(i).getY();
                 for (int j = 0; j < players.length; j++) {
-                    px = players[j].getX();
-                    py = players[j].getY();
-                    if (px == xx && py == yy) {
+                    playerX = players[j].getX();
+                    playerY = players[j].getY();
+                    if (playerX == objectX && playerY == objectY) {
                         coins.remove(i);
                         if (coins.size() > 0) {
                             i = i - 1;
@@ -192,14 +190,16 @@ public class GUI extends JPanel implements ActionListener {
                 }
             }
         }
+        
+        //lifepack collect
         for (int i = 0; i < lifePacks.size(); i++) {
-            xx = lifePacks.get(i).getX();
-            yy = lifePacks.get(i).getY();
+            objectX = lifePacks.get(i).getX();
+            objectY = lifePacks.get(i).getY();
 
             for (int j = 0; j < players.length; j++) {
-                px = players[j].getX();
-                py = players[j].getY();
-                if (px == xx && py == yy) {
+                playerX = players[j].getX();
+                playerY = players[j].getY();
+                if (playerX == objectX && playerY == objectY) {
                     lifePacks.remove(i);
                     if (lifePacks.size() > 0) {
                         i = i - 1;
@@ -211,49 +211,47 @@ public class GUI extends JPanel implements ActionListener {
 
     public void ditectCollisions() {
         Rectangle one, two;
-        for (int i = 0; i < bullet.size(); i++) {
-            one = bullet.get(i).getRec();
+        //bullet hit stone
+        for (int i = 0; i < bullets.size(); i++) {
+            one = bullets.get(i).getRec();
             for (int j = 0; j < stone.length; j++) {
                 two = stone[j].getRec();
-                //    System.out.println(two.width+"and"+two.OUT_BOTTOM+"and"+two.OUT_LEFT+"and"+two.OUT_RIGHT);
                 if (one.intersects(two)) {
 
-                    if (bullet.size() > 0) {
-                        bullet.remove(i);
+                    if (bullets.size() > 0) {
+                        bullets.remove(i);
                         i = i - 1;
-                        System.out.println("Bullet Removed1");
                     }
                 }
             }
+            //bullet hit player
             for (int j = 0; j < players.length; j++) {
                 two = players[j].getRectangle();
-                if (one.intersects(two) && bullet.get(i).getShootBy() != j) {
+                if (one.intersects(two) && bullets.get(i).getShootBy() != j) {
 
-                    if (bullet.size() > 0) {
-                        bullet.remove(i);
+                    if (bullets.size() > 0) {
+                        bullets.remove(i);
                         i = i - 1;
-                        System.out.println("Bullet Removed2");
                     }
                 }
             }
+            //bullet hit brick
             for (int j = 0; j < bricks.length; j++) {
                 two = bricks[j].getRectangle();
                 if (one.intersects(two)) {
 
-                    if (bullet.size() > 0) {
-                        bullet.remove(i);
+                    if (bullets.size() > 0) {
+                        bullets.remove(i);
                         i = i - 1;
-                        System.out.println("Bullet Removed3");
                     }
                 }
             }
-            if (bullet.size() > 0) {
-                if (!bullet.get(i).isVisible()) {
+            if (bullets.size() > 0) {
+                if (!bullets.get(i).isVisible()) {
 
-                    if (bullet.size() > 0) {
-                        bullet.remove(i);
+                    if (bullets.size() > 0) {
+                        bullets.remove(i);
                         i = i - 1;
-                        System.out.println("Bullet Removed4");
                     }
                 }
             }
@@ -264,35 +262,33 @@ public class GUI extends JPanel implements ActionListener {
     public void drawBullets(Graphics g) {
         int bDirection;
         Graphics2D g2d = (Graphics2D) g;
-        //  System.out.println("Bullet Size"+bullet.size());
-        for (int i = 0; i < bullet.size(); i++) {
-            bDirection = bullet.get(i).getDirection();
-            x = bullet.get(i).getX();
-            y = bullet.get(i).getY();
-            if (bDirection == 0 && bullet.get(i).isVisible()) {
-
-                g2d.drawImage(bullet.get(i).getBullet().getImage(), x, y, this);
-            } else if (bDirection == 1 && bullet.get(i).isVisible()) {
+        for (int i = 0; i < bullets.size(); i++) {
+            bDirection = bullets.get(i).getDirection();
+            x = bullets.get(i).getX();
+            y = bullets.get(i).getY();
+            if (bDirection == 0 && bullets.get(i).isVisible()) {
+                g2d.drawImage(bullets.get(i).getBullet().getImage(), x, y, this);
+                
+            } else if (bDirection == 1 && bullets.get(i).isVisible()) {
 
                 transform.setToTranslation(x, y);
                 transform.rotate(Math.toRadians(90), 12.5, 12.5);
-                g2d.drawImage(bullet.get(i).getBullet().getImage(), transform, this);
-            } else if (bDirection == 2 && bullet.get(i).isVisible()) {
+                g2d.drawImage(bullets.get(i).getBullet().getImage(), transform, this);
+            } else if (bDirection == 2 && bullets.get(i).isVisible()) {
                 transform.setToTranslation(x, y);
                 transform.rotate(Math.toRadians(180), 12.5, 12.5);
-                g2d.drawImage(bullet.get(i).getBullet().getImage(), transform, this);
-            } else if (bDirection == 3 && bullet.get(i).isVisible()) {
+                g2d.drawImage(bullets.get(i).getBullet().getImage(), transform, this);
+            } else if (bDirection == 3 && bullets.get(i).isVisible()) {
                 transform.setToTranslation(x, y);
                 transform.rotate(Math.toRadians(270), 12.5, 12.5);
-                g2d.drawImage(bullet.get(i).getBullet().getImage(), transform, this);
+                g2d.drawImage(bullets.get(i).getBullet().getImage(), transform, this);
             }
-            System.out.println("Bullet Moving");
         }
     }
 
     public void moveBullets() {
-        for (int i = 0; i < bullet.size(); i++) {
-            bullet.get(i).move();
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).move();
         }
     }
 
