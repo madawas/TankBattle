@@ -23,6 +23,7 @@ public class WriteToServer {
 
     public void writeCommand(String s) throws UnknownHostException, IOException, InterruptedException {
         Thread.sleep(1050);
+        System.out.println(s);
         createSocket();
         write = new DataOutputStream(clientSocket.getOutputStream());
         write.writeBytes(s);

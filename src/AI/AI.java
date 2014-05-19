@@ -4,6 +4,8 @@
  */
 package AI;
 
+import AI.heuristics.AStarHeuristic;
+import AI.heuristics.ClosestHeuristic;
 import GameObjects.Brick;
 import GameObjects.Bullet;
 import GameObjects.CoinPile;
@@ -37,15 +39,14 @@ public class AI extends Thread {
     private Water[] water;
     private Stone[] stone;
     private ArrayList<Bullet> bullet;
-    private Maze maze;
-    private Square[][] square;
     private int playerX;
     private int playerY;
     private int dir;
     private Player temp;
     private String status;
-    private List<Square> bestListCoins = new ArrayList<Square>();
+   // private List<Square> bestListCoins = new ArrayList<Square>();
     private WriteToServer write;
+    private AreaMap map;
 
     public AI(ArrayList<CoinPile> coins, ArrayList<LifePack> packs, Player[] players, Brick[] bricks, Water[] water, Stone[] stone, ArrayList<Bullet> bullet) {
         this.coins = coins;
@@ -55,137 +56,146 @@ public class AI extends Thread {
         this.water = water;
         this.stone = stone;
         this.bullet = bullet;
-        maze = new Maze(20, 20);
-        square = new Square[20][20];
+  
+       // square = new Square[20][20];
         write = new WriteToServer();
     }
 
-    public void generateSqures() {
+    public void generateMap() {
         int x, y;
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
-                square[i][j] = new Square(i, j, getMaze());
-                square[i][j].setStatus(true);
+                int[][] obstacleMap = new int[20][20];
+                this.map = new AreaMap(20, 20, obstacleMap);
             }
         }
         for (int i = 0; i < bricks.length; i++) {
             x = bricks[i].getX() / 25;
             y = bricks[i].getY() / 25;
-            square[x][y].setStatus(false);
+            map.obstacleMap[x][y] = 1;
         }
         for (int i = 0; i < water.length; i++) {
             x = water[i].getX() / 25;
             y = water[i].getY() / 25;
-            square[x][y].setStatus(false);
+            map.obstacleMap[x][y] = 1;
         }
         for (int i = 0; i < stone.length; i++) {
             x = stone[i].getX() / 25;
             y = stone[i].getY() / 25;
-            square[x][y].setStatus(false);
+            map.obstacleMap[x][y] = 1;
         }
-    }
-
-    public void createAdjecencies() {
-        getMaze().init(square);
-    }
-//   public void calculatepath()
-//    {
-//        System.out.println("calledYEpp");
-//        getMaze().setEndStart();
-//        getMaze().findBestPath(5,5);
-//        getMaze().printBestList();
-//   }
-
-    /**
-     * @return the maze
-     */
-    public Maze getMaze() {
-        return maze;
-    }
-
-    /**
-     * @param maze the maze to set
-     */
-    public void setMaze(Maze maze) {
-        this.maze = maze;
-    }
-
-    public void followeCoinPile() throws UnknownHostException, IOException, InterruptedException {
-        generateSqures();
-        createAdjecencies();
-        int xx = 0;
-        int yy = 0;
-        if (coins.size() > 0) {
-            xx = coins.get(0).getX() / 25;
-            yy = coins.get(0).getY() / 25;
-            coinX = coins.get(0).getX() / 25;
-            coinY = coins.get(0).getY() / 25;
-        }
-        //System.out.println(xx + "aww" + yy);
-        this.getMaze().setGoal(xx, yy);
-        //System.out.println("GOAL=" + xx + "and" + yy);
-        xx = getPlayerLocationX(DataHandler.player) / 25;
-        yy = getPlayerLocationY(DataHandler.player) / 25;
-        temp = new Player("Temp", xx, yy, 0, false, players[DataHandler.player].getDirection(),"images/tanks/tank0.png");
-        //System.out.println("TARGET" + xx + "awwwww" + yy);
-        bestListCoins = this.getMaze().findBestPath(xx, yy);
-        follow();
-    }
-
-    public void follow() throws UnknownHostException, IOException, InterruptedException {
-        while (bestListCoins != null && bestListCoins.size() > 0 && coinPileExist(coinX, coinY)) {
-
-
-            playerX = temp.getX();
-            playerY = temp.getY();
-            // System.out.println(bestListCoins.get(bestListCoins.size()-1).getX()+"ane manda"+bestListCoins.get(bestListCoins.size()-1).getY());
-            // System.out.println(playerX+"aneeee"+playerY);
-            direction = getPlayerDirection(DataHandler.player);
-            if (playerX == bestListCoins.get(bestListCoins.size() - 1).getX() && (playerY + 1) == bestListCoins.get(bestListCoins.size() - 1).getY()) {
-                if (!detectCollision(playerX, playerY + 1)) {
-                    //System.out.println(bestListCoins.size() + "checkD");
-                    down(direction);
-                    temp.setX(playerX);
-                    temp.setY(playerY + 1);
-                    temp.setDirection(2);
-                    bestListCoins.remove(bestListCoins.size() - 1);
-                }
-            } else if (playerX == bestListCoins.get(bestListCoins.size() - 1).getX() && (playerY - 1) == bestListCoins.get(bestListCoins.size() - 1).getY()) {
-                if (!detectCollision(playerX, playerY - 1)) {
-                    //System.out.println(bestListCoins.size() + "checkU");
-                    up(direction);
-                    temp.setX(playerX);
-                    temp.setY(playerY - 1);
-                    temp.setDirection(0);
-                    bestListCoins.remove(bestListCoins.size() - 1);
-                }
-            } else if ((playerX + 1) == bestListCoins.get(bestListCoins.size() - 1).getX() && playerY == bestListCoins.get(bestListCoins.size() - 1).getY()) {
-                if (!detectCollision(playerX + 1, playerY)) {
-                    //System.out.println(bestListCoins.size() + "checkR");
-                    right(direction);
-                    temp.setX(playerX + 1);
-                    temp.setY(playerY);
-                    temp.setDirection(1);
-                    bestListCoins.remove(bestListCoins.size() - 1);
-                }
-            } else if ((playerX - 1) == bestListCoins.get(bestListCoins.size() - 1).getX() && playerY == bestListCoins.get(bestListCoins.size() - 1).getY()) {
-                if (!detectCollision(playerX - 1, playerY)) {
-                    //System.out.println(bestListCoins.size() + "checkL");
-                    left(direction);
-                    temp.setX(playerX - 1);
-                    temp.setY(playerY);
-                    temp.setDirection(3);
-                    bestListCoins.remove(bestListCoins.size() - 1);
-                }
-            } else {
-                return;
+        for (int i = 0; i < 20; i++) {
+                    for (int j = 0; j < 20; j++) {
+                        System.out.print(map.obstacleMap[j][i]);
+                    }
+                    System.out.println("");
             }
-            //System.out.println("sizeOfit=" + bestListCoins.size());
-        }
-        write.writeCommand("SHOOT#");
-        bestListCoins = null;
-
     }
+
+
+    public void followCoinPile() throws IOException, UnknownHostException, InterruptedException{
+        int startX;
+        int startY;
+        int goalX;
+        int goalY;
+        AStarHeuristic heuristic = new ClosestHeuristic();
+        AStar pathFinder = new AStar(map, heuristic);
+        startX = getPlayerLocationX(DataHandler.player)/25;
+        startY = getPlayerLocationY(DataHandler.player)/25;
+        ArrayList<Path> pathsToCoins = new ArrayList<>();
+        int closestCoinDistance=1000;
+        int closestCoin=0;
+        
+        for (int i = 0; i < coins.size(); i++) {
+            goalX = coins.get(i).getX()/25;
+            goalY = coins.get(i).getY()/25;
+            Path shortestPath = pathFinder.calcShortestPath(startX, startY, goalX, goalY);
+            if(shortestPath.getLength()<closestCoinDistance){
+                closestCoinDistance = shortestPath.getLength();
+                closestCoin = i;
+            }
+            pathsToCoins.add(i, shortestPath);
+            
+        }
+        travel(pathsToCoins.get(closestCoin));
+        
+    }
+    
+    
+    private void travel(Path path) throws IOException, UnknownHostException, InterruptedException {
+       int k=2;
+        if(path.getLength()<2) k = path.getLength();
+        for (int i = 0; i < k; i++) {
+            int dx = path.getX(i);
+            int dy = path.getY(i);
+            int px = getPlayerLocationX(DataHandler.player)/25;
+            int py = getPlayerLocationY(DataHandler.player)/25;
+            dir = getPlayerDirection(DataHandler.player);
+            System.out.println(px+" "+dx+" , "+py+" "+dy+" "+dir);
+            if(dx-px>0) right(dir);else if(dx-px<0) left(dir);
+            dir = getPlayerDirection(DataHandler.player);
+            if(dy-py>0) down(dir);else if(dy-py<0) up(dir);
+                    
+            
+        }
+    }
+    
+    
+
+//    public void follow() throws UnknownHostException, IOException, InterruptedException {
+//        while (bestListCoins != null && bestListCoins.size() > 0 && coinPileExist(coinX, coinY)) {
+//
+//
+//            playerX = temp.getX();
+//            playerY = temp.getY();
+//            // System.out.println(bestListCoins.get(bestListCoins.size()-1).getX()+"ane manda"+bestListCoins.get(bestListCoins.size()-1).getY());
+//            // System.out.println(playerX+"aneeee"+playerY);
+//            direction = getPlayerDirection(DataHandler.player);
+//            if (playerX == bestListCoins.get(bestListCoins.size() - 1).getX() && (playerY + 1) == bestListCoins.get(bestListCoins.size() - 1).getY()) {
+//                if (!detectCollision(playerX, playerY + 1)) {
+//                    //System.out.println(bestListCoins.size() + "checkD");
+//                    down(direction);
+//                    temp.setX(playerX);
+//                    temp.setY(playerY + 1);
+//                    temp.setDirection(2);
+//                    bestListCoins.remove(bestListCoins.size() - 1);
+//                }
+//            } else if (playerX == bestListCoins.get(bestListCoins.size() - 1).getX() && (playerY - 1) == bestListCoins.get(bestListCoins.size() - 1).getY()) {
+//                if (!detectCollision(playerX, playerY - 1)) {
+//                    //System.out.println(bestListCoins.size() + "checkU");
+//                    up(direction);
+//                    temp.setX(playerX);
+//                    temp.setY(playerY - 1);
+//                    temp.setDirection(0);
+//                    bestListCoins.remove(bestListCoins.size() - 1);
+//                }
+//            } else if ((playerX + 1) == bestListCoins.get(bestListCoins.size() - 1).getX() && playerY == bestListCoins.get(bestListCoins.size() - 1).getY()) {
+//                if (!detectCollision(playerX + 1, playerY)) {
+//                    //System.out.println(bestListCoins.size() + "checkR");
+//                    right(direction);
+//                    temp.setX(playerX + 1);
+//                    temp.setY(playerY);
+//                    temp.setDirection(1);
+//                    bestListCoins.remove(bestListCoins.size() - 1);
+//                }
+//            } else if ((playerX - 1) == bestListCoins.get(bestListCoins.size() - 1).getX() && playerY == bestListCoins.get(bestListCoins.size() - 1).getY()) {
+//                if (!detectCollision(playerX - 1, playerY)) {
+//                    //System.out.println(bestListCoins.size() + "checkL");
+//                    left(direction);
+//                    temp.setX(playerX - 1);
+//                    temp.setY(playerY);
+//                    temp.setDirection(3);
+//                    bestListCoins.remove(bestListCoins.size() - 1);
+//                }
+//            } else {
+//                return;
+//            }
+//            //System.out.println("sizeOfit=" + bestListCoins.size());
+//        }
+//        write.writeCommand("SHOOT#");
+//        bestListCoins = null;
+//
+//    }
 
     public void up(int dir) throws IOException, UnknownHostException, InterruptedException {
         if (dir == 0) {
@@ -271,7 +281,7 @@ public class AI extends Thread {
 
     public void coinFollow() throws UnknownHostException, IOException, InterruptedException {
 
-        followeCoinPile();
+        followCoinPile();
     }
 
     public int getPlayerLocationX(int player) {
@@ -292,6 +302,7 @@ public class AI extends Thread {
                 while (coins.size() <= 0) {
                     Thread.sleep(50);
                 }
+                generateMap();
                 coinFollow();
             } catch (UnknownHostException ex) {
                 Logger.getLogger(AI.class.getName()).log(Level.SEVERE, null, ex);
@@ -302,4 +313,6 @@ public class AI extends Thread {
             }
         }
     }
+
+    
 }
