@@ -32,7 +32,7 @@ public class ServerRead implements Runnable {
             String message = reader.readLine();
             gameDataHandler.parseMessage(message);
             
-            System.out.println(message);
+            //System.out.println(message);
         }
     }
 

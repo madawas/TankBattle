@@ -19,7 +19,7 @@ public class AreaMap {
 	private int startLocationY = 0;
 	private int goalLocationX = 0;
 	private int goalLocationY = 0;
-	private int[][] obstacleMap;
+	public int[][] obstacleMap;
 
 //	private Logger log = new Logger();
 	
@@ -28,10 +28,8 @@ public class AreaMap {
 		this.mapHeight = mapHeight;
 		this.obstacleMap = obstacleMap;
 		
-		createMap();
-		System.out.println("\tMap Created");
-		registerEdges();
-		System.out.println("\tMap Node edges registered");
+                
+                
 	}
 	private void createMap() {
 		Node node;

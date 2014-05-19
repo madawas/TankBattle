@@ -87,8 +87,8 @@ public class DataHandler {
             gameInterface = new GameUI();
             gameInterface.getGameInterface().initialize(bricks, water, stones, players, coins, lifePacks, bullets);
             ai = new AI(coins, lifePacks, players, bricks, water, stones, bullets);
-            ai.generateSqures();
-            ai.createAdjecencies();
+            ai.generateMap();
+           // ai.createAdjecencies();
             
             Thread t = new Thread(ai);
             t.start();
