@@ -72,100 +72,243 @@ public class ScoreBoard extends javax.swing.JPanel {
         healthP1 = new javax.swing.JLabel();
         healthP0 = new javax.swing.JLabel();
         scoreP0 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(240, 248, 181));
-        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setMaximumSize(new java.awt.Dimension(424, 302));
         setName("Score Board"); // NOI18N
         setOpaque(false);
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         iconP0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank2.png"))); // NOI18N
-        add(iconP0, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 101, -1, -1));
 
         iconP1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank2.png"))); // NOI18N
-        add(iconP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 58, -1, -1));
 
         iconP2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank2.png"))); // NOI18N
         iconP2.setToolTipText("");
-        add(iconP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 187, -1, -1));
 
         iconP3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank2.png"))); // NOI18N
-        add(iconP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 144, -1, -1));
 
         iconP4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank2.png"))); // NOI18N
         iconP4.setToolTipText("");
-        add(iconP4, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 230, -1, -1));
 
         scoreP3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         scoreP3.setForeground(new java.awt.Color(0, 0, 255));
-        scoreP3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        scoreP3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         scoreP3.setText("0000");
-        scoreP3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        add(scoreP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 187, 108, 25));
+        scoreP3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         healthP4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         healthP4.setForeground(new java.awt.Color(0, 0, 255));
-        healthP4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        healthP4.setText("0000");
-        healthP4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        add(healthP4, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 230, 108, 25));
+        healthP4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        healthP4.setText("00");
+        healthP4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         healthP3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         healthP3.setForeground(new java.awt.Color(0, 0, 255));
-        healthP3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        healthP3.setText("0000");
-        healthP3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        add(healthP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 187, 108, 25));
+        healthP3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        healthP3.setText("00");
+        healthP3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         scoreP4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         scoreP4.setForeground(new java.awt.Color(0, 0, 255));
-        scoreP4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        scoreP4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         scoreP4.setText("0000");
-        scoreP4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        add(scoreP4, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 230, 108, 25));
+        scoreP4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         scoreP2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         scoreP2.setForeground(new java.awt.Color(0, 0, 255));
-        scoreP2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        scoreP2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         scoreP2.setText("0000");
-        scoreP2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        add(scoreP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 144, 108, 25));
+        scoreP2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         healthP2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         healthP2.setForeground(new java.awt.Color(0, 0, 255));
-        healthP2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        healthP2.setText("0000");
-        healthP2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        add(healthP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 144, 108, 25));
+        healthP2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        healthP2.setText("00");
+        healthP2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         scoreP1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         scoreP1.setForeground(new java.awt.Color(0, 0, 255));
-        scoreP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        scoreP1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         scoreP1.setText("0000");
-        scoreP1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        add(scoreP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 101, 108, 25));
+        scoreP1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         healthP1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         healthP1.setForeground(new java.awt.Color(0, 0, 255));
-        healthP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        healthP1.setText("0000");
-        healthP1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        add(healthP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 101, 108, 25));
+        healthP1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        healthP1.setText("00");
+        healthP1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         healthP0.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         healthP0.setForeground(new java.awt.Color(0, 0, 255));
-        healthP0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        healthP0.setText("0000");
-        healthP0.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        add(healthP0, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 58, 108, 25));
+        healthP0.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        healthP0.setText("00");
+        healthP0.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         scoreP0.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         scoreP0.setForeground(new java.awt.Color(0, 0, 255));
-        scoreP0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        scoreP0.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         scoreP0.setText("0000");
-        scoreP0.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        add(scoreP0, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 58, 108, 25));
+        scoreP0.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        jLabel1.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel1.setText("SCORE");
+
+        jLabel2.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel2.setText("HEALTH");
+
+        jLabel3.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel3.setText("%");
+
+        jLabel4.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel4.setText("%");
+
+        jLabel5.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel5.setText("%");
+
+        jLabel6.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel6.setText("%");
+
+        jLabel7.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel7.setText("%");
+
+        jLabel8.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel8.setText("$");
+
+        jLabel9.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel9.setText("$");
+
+        jLabel10.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel10.setText("$");
+
+        jLabel11.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel11.setText("$");
+
+        jLabel12.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel12.setText("$");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iconP1)
+                    .addComponent(iconP0)
+                    .addComponent(iconP3)
+                    .addComponent(iconP2)
+                    .addComponent(iconP4))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(scoreP4, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scoreP0, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scoreP1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scoreP2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scoreP3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel8))
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(healthP4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(healthP3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(healthP1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(healthP2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(healthP0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)))))
+                .addGap(58, 58, 58))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iconP1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(scoreP0, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(healthP0, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iconP0)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(scoreP1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(healthP1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iconP3)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(scoreP2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(healthP2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iconP2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(scoreP3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(healthP3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iconP4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(scoreP4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(healthP4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JLabel healthP0;
@@ -178,6 +321,18 @@ public class ScoreBoard extends javax.swing.JPanel {
     private javax.swing.JLabel iconP2;
     private javax.swing.JLabel iconP3;
     private javax.swing.JLabel iconP4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private static javax.swing.JLabel scoreP0;
     private static javax.swing.JLabel scoreP1;
     private static javax.swing.JLabel scoreP2;
