@@ -43,21 +43,42 @@ public class GamePanel extends JPanel implements ActionListener {
     private AffineTransform transform;
     private ImageIcon tilemap;
     private ImageIcon background;
+    private ImageIcon scoreBackground;
+    //Labels
+    private javax.swing.JLabel healthP0;
+    private javax.swing.JLabel healthP1;
+    private javax.swing.JLabel healthP2;
+    private javax.swing.JLabel healthP3;
+    private javax.swing.JLabel healthP4;
+    private javax.swing.JLabel iconP0;
+    private javax.swing.JLabel iconP1;
+    private javax.swing.JLabel iconP2;
+    private javax.swing.JLabel iconP3;
+    private javax.swing.JLabel iconP4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel scoreP0;
+    private javax.swing.JLabel scoreP1;
+    private javax.swing.JLabel scoreP2;
+    private javax.swing.JLabel scoreP3;
+    private javax.swing.JLabel scoreP4;
 
     public GamePanel() {
         this.transform = new AffineTransform();
-        //this.background = new ImageIcon("images/background.jpg");
+        this.background = new ImageIcon("images/background.jpg");
         this.setOpaque(false);
         this.tilemap = new ImageIcon("images/tilemap.png");
+        this.scoreBackground = new ImageIcon("images/scorePanelBackground.png");
         setDoubleBuffered(true);
         initializeScorePanel();
     }
 
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
+    public void paint(Graphics g) {        
         Graphics2D g2d = (Graphics2D) g;
-        //g2d.drawImage(background.getImage(), 0, 0, this);
+        g2d.drawImage(background.getImage(), 0, 0, this);
+        g2d.drawImage(scoreBackground.getImage(), 585, 80, this);
+        super.paint(g);
         g2d.drawImage(tilemap.getImage(), 50, 50, this);
         drawMap(g);
         drawPlayers(g);
@@ -80,7 +101,7 @@ public class GamePanel extends JPanel implements ActionListener {
         timer.start();
     }
 
-    public void drawMap(Graphics g) {
+    private void drawMap(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         for (int i = 0; i < bricks.length; i++) {
             x = bricks[i].getX();
@@ -101,7 +122,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
-    public void drawPlayers(Graphics g) {
+    private void drawPlayers(Graphics g) {
         int rotation;
         Graphics2D g2d = (Graphics2D) g;
         for (int i = 0; i < players.length; i++) {
@@ -121,7 +142,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    public void drawCoinPiles(Graphics g) {
+    private void drawCoinPiles(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
         for (int i = 0; i < coins.size(); i++) {
@@ -131,7 +152,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    public void drawLifePacks(Graphics g) {
+    private void drawLifePacks(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
         for (int i = 0; i < lifePacks.size(); i++) {
@@ -141,7 +162,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }  
     
-    public void drawBullets(Graphics g) {
+    private void drawBullets(Graphics g) {
         int bulletDirn;
         Graphics2D g2d = (Graphics2D) g;
 
@@ -169,20 +190,20 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    public void moveBullets() {
+    private void moveBullets() {
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).move();
         }
     }
 
-    public void movePlayers() {
+    private void movePlayers() {
         for (int i = 0; i < players.length; i++) {
             players[i].move();
             players[i].rotateImage();
         }
     }
     
-    public void removeObjects() {
+    private void removeObjects() {
         long currentTime = System.currentTimeMillis();
         long timeToExpire;
         long lifePackTime;
@@ -211,7 +232,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    public void collectObjects() {
+    private void collectObjects() {
         int objectX;
         int objectY;
         int playerX;
@@ -253,7 +274,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }    
     
-    public void ditectCollisions() {
+    private void ditectCollisions() {
         Rectangle bullet, object;
         //bullet hit stone
         for (int i = 0; i < bullets.size(); i++) {
@@ -303,7 +324,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
     
-    public void updateBricks() {
+    private void updateBricks() {
         int damage;
         
         for(int i = 0; i < bricks.length; i++) {
@@ -330,7 +351,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
     
-    public void removeDeadPlayers() {
+    private void removeDeadPlayers() {
         for(int i = 0; i < players.length; i++) {
             if(!players[i].isAlive())
                 players[i].setVisible(false);
@@ -349,7 +370,7 @@ public class GamePanel extends JPanel implements ActionListener {
         repaint();
     }
     
-    public void updateScores() {
+    private void updateScores() {
         int num;
         Player player;
         for(int i = 0; i < players.length; ++i){
@@ -385,9 +406,9 @@ public class GamePanel extends JPanel implements ActionListener {
     private void initializeScorePanel(){
         JPanel scorePanel = new JPanel();
         setLayout(null);
-        scorePanel.setBackground(Color.CYAN);
+        scorePanel.setOpaque(false);
         scorePanel.setPreferredSize(new Dimension(300, 200));
-        scorePanel.setBounds(new Rectangle(new Point(600, 70), new Dimension(350, 280)));
+        scorePanel.setBounds(new Rectangle(new Point(600, 100), new Dimension(350, 280)));
         scorePanel.setLayout(new GridLayout(6, 3, 10, 5));
     
         iconP0 = new javax.swing.JLabel();
@@ -419,49 +440,51 @@ public class GamePanel extends JPanel implements ActionListener {
         iconP4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank4.png"))); // NOI18N
 
         scoreP3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        scoreP3.setForeground(new java.awt.Color(0, 0, 255));
+        scoreP3.setForeground(new java.awt.Color(245, 208, 0));
         scoreP3.setText("0000 $");
 
         healthP4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        healthP4.setForeground(new java.awt.Color(0, 0, 255));
+        healthP4.setForeground(new java.awt.Color(245, 208, 0));
         healthP4.setText("00 %");
 
         healthP3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        healthP3.setForeground(new java.awt.Color(0, 0, 255));
+        healthP3.setForeground(new java.awt.Color(245, 208, 0));
         healthP3.setText("00 %");
 
         scoreP4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        scoreP4.setForeground(new java.awt.Color(0, 0, 255));
+        scoreP4.setForeground(new java.awt.Color(245, 208, 0));
         scoreP4.setText("0000 $");
 
         scoreP2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        scoreP2.setForeground(new java.awt.Color(0, 0, 255));
+        scoreP2.setForeground(new java.awt.Color(245, 208, 0));
         scoreP2.setText("0000 $");
 
         healthP2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        healthP2.setForeground(new java.awt.Color(0, 0, 255));
+        healthP2.setForeground(new java.awt.Color(245, 208, 0));
         healthP2.setText("00 %");
 
         scoreP1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        scoreP1.setForeground(new java.awt.Color(0, 0, 255));
+        scoreP1.setForeground(new java.awt.Color(245, 208, 0));
         scoreP1.setText("0000 $");
 
         healthP1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        healthP1.setForeground(new java.awt.Color(0, 0, 255));
+        healthP1.setForeground(new java.awt.Color(245, 208, 0));
         healthP1.setText("00 %");
 
         healthP0.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        healthP0.setForeground(new java.awt.Color(0, 0, 255));
+        healthP0.setForeground(new java.awt.Color(245, 208, 0));
         healthP0.setText("00 %");
 
         scoreP0.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        scoreP0.setForeground(new java.awt.Color(0, 0, 255));
+        scoreP0.setForeground(new java.awt.Color(245, 208, 0));
         scoreP0.setText("0000 $");
 
         jLabel1.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(161, 245, 0));
         jLabel1.setText("SCORE");
 
         jLabel2.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(161, 245, 0));
         jLabel2.setText("HEALTH");
 
         JLabel empty = new JLabel();
@@ -475,25 +498,8 @@ public class GamePanel extends JPanel implements ActionListener {
         scorePanel.add(iconP4);scorePanel.add(scoreP4);scorePanel.add(healthP4);
         
         this.add(scorePanel);
-    }
+    } 
     
-    private javax.swing.JLabel healthP0;
-    private javax.swing.JLabel healthP1;
-    private javax.swing.JLabel healthP2;
-    private javax.swing.JLabel healthP3;
-    private javax.swing.JLabel healthP4;
-    private javax.swing.JLabel iconP0;
-    private javax.swing.JLabel iconP1;
-    private javax.swing.JLabel iconP2;
-    private javax.swing.JLabel iconP3;
-    private javax.swing.JLabel iconP4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel scoreP0;
-    private javax.swing.JLabel scoreP1;
-    private javax.swing.JLabel scoreP2;
-    private javax.swing.JLabel scoreP3;
-    private javax.swing.JLabel scoreP4;
 }
 
 
