@@ -23,11 +23,12 @@ public class AreaMap {
 
 //	private Logger log = new Logger();
 	
-	AreaMap(int mapWith, int mapHeight, int[][] obstacleMap) {
+	public AreaMap(int mapWith, int mapHeight, int[][] obstacleMap) {
 		this.mapWith = mapWith;
 		this.mapHeight = mapHeight;
 		this.obstacleMap = obstacleMap;
-		
+		createMap();
+                registerEdges();
                 
                 
 	}

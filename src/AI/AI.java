@@ -62,34 +62,27 @@ public class AI extends Thread {
     }
 
     public void generateMap() {
-        int x, y;
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
-                int[][] obstacleMap = new int[20][20];
-                this.map = new AreaMap(20, 20, obstacleMap);
-            }
-        }
+       // int x, y;
+        
+        int[][] obstacleMap = new int[20][20];
+        
+        
         for (int i = 0; i < bricks.length; i++) {
             x = bricks[i].getX() / 25;
             y = bricks[i].getY() / 25;
-            map.obstacleMap[x][y] = 1;
+            obstacleMap[x][y] = 1;
         }
         for (int i = 0; i < water.length; i++) {
             x = water[i].getX() / 25;
             y = water[i].getY() / 25;
-            map.obstacleMap[x][y] = 1;
+            obstacleMap[x][y] = 1;
         }
         for (int i = 0; i < stone.length; i++) {
             x = stone[i].getX() / 25;
             y = stone[i].getY() / 25;
-            map.obstacleMap[x][y] = 1;
+            obstacleMap[x][y] = 1;
         }
-        for (int i = 0; i < 20; i++) {
-                    for (int j = 0; j < 20; j++) {
-                        System.out.print(map.obstacleMap[j][i]);
-                    }
-                    System.out.println("");
-            }
+        this.map = new AreaMap(20, 20, obstacleMap);
     }
 
 
@@ -104,28 +97,47 @@ public class AI extends Thread {
         startY = getPlayerLocationY(DataHandler.player)/25;
         ArrayList<Path> pathsToCoins = new ArrayList<>();
         int closestCoinDistance=1000;
-        int closestCoin=0;
+        int closestCoin=-1;
         
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                System.out.print(map.obstacleMap[j][i]);
+            }
+            System.out.println("");
+        }
+        
+        
+        
+        
+        if(coins.isEmpty()){System.out.println("#"); return;}
         for (int i = 0; i < coins.size(); i++) {
             goalX = coins.get(i).getX()/25;
             goalY = coins.get(i).getY()/25;
             Path shortestPath = pathFinder.calcShortestPath(startX, startY, goalX, goalY);
+            System.out.println(startX+" "+startY+" "+goalX+" "+goalY);
+            pathFinder.printPath();
+            
             if(shortestPath.getLength()<closestCoinDistance){
                 closestCoinDistance = shortestPath.getLength();
+                pathFinder.printPath();
                 closestCoin = i;
             }
             pathsToCoins.add(i, shortestPath);
             
         }
-        travel(pathsToCoins.get(closestCoin));
+        
+        if(closestCoin!=-1){
+            
+            travel(pathsToCoins.get(closestCoin));
+        }
         
     }
     
     
     private void travel(Path path) throws IOException, UnknownHostException, InterruptedException {
-       int k=2;
-        if(path.getLength()<2) k = path.getLength();
-        for (int i = 0; i < k; i++) {
+        
+        int k = Math.min(2, path.getLength());
+        for (int i = 1; i < k; i++) {
             int dx = path.getX(i);
             int dy = path.getY(i);
             int px = getPlayerLocationX(DataHandler.player)/25;
@@ -133,7 +145,6 @@ public class AI extends Thread {
             dir = getPlayerDirection(DataHandler.player);
             System.out.println(px+" "+dx+" , "+py+" "+dy+" "+dir);
             if(dx-px>0) right(dir);else if(dx-px<0) left(dir);
-            dir = getPlayerDirection(DataHandler.player);
             if(dy-py>0) down(dir);else if(dy-py<0) up(dir);
                     
             
@@ -297,13 +308,17 @@ public class AI extends Thread {
     }
 
     public void run() {
+        int i=0;
         while (true) {
             try {
                 while (coins.size() <= 0) {
                     Thread.sleep(50);
                 }
+                System.out.print(i+++" ");
                 generateMap();
+                System.out.println(i);
                 coinFollow();
+                Thread.sleep(1000);
             } catch (UnknownHostException ex) {
                 Logger.getLogger(AI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
