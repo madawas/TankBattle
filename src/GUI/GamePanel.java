@@ -16,9 +16,14 @@ import GameObjects.Player;
 import GameObjects.Stone;
 import GameObjects.Water;
 import Utility.Constants;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -41,16 +46,18 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public GamePanel() {
         this.transform = new AffineTransform();
-        this.background = new ImageIcon("images/background.jpg");
+        //this.background = new ImageIcon("images/background.jpg");
+        this.setOpaque(false);
         this.tilemap = new ImageIcon("images/tilemap.png");
         setDoubleBuffered(true);
+        initializeScorePanel();
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(background.getImage(), 0, 0, this);
+        //g2d.drawImage(background.getImage(), 0, 0, this);
         g2d.drawImage(tilemap.getImage(), 50, 50, this);
         drawMap(g);
         drawPlayers(g);
@@ -343,14 +350,150 @@ public class GamePanel extends JPanel implements ActionListener {
     }
     
     public void updateScores() {
-        int[][] scores = new int[players.length][3];
+        int num;
+        Player player;
         for(int i = 0; i < players.length; ++i){
-            scores[i][0] = Integer.parseInt(players[i].getName().substring(1));
-            scores[i][1] = players[i].getScore();
-            scores[i][2] = players[i].getDamage();
-            ScoreBoard.updateScores(scores, players.length);
+            player = players[i];
+            num = Integer.parseInt(player.getName().substring(1));
+            switch(num){
+                default:
+                    break;
+                case 0:
+                    scoreP0.setText(Integer.toString(player.getScore())+" $");
+                    healthP0.setText(Integer.toString(player.getDamage())+" %");
+                    break;
+                case 1:
+                    scoreP1.setText(Integer.toString(player.getScore())+" $");
+                    healthP1.setText(Integer.toString(player.getDamage())+" %");
+                    break;
+                case 2:
+                    scoreP2.setText(Integer.toString(player.getScore())+" $");
+                    healthP2.setText(Integer.toString(player.getDamage())+" %");
+                    break;
+                case 3:
+                    scoreP3.setText(Integer.toString(player.getScore())+" $");
+                    healthP3.setText(Integer.toString(player.getDamage())+" %");;
+                    break;
+                case 4:
+                    scoreP4.setText(Integer.toString(player.getScore())+" $");
+                    healthP4.setText(Integer.toString(player.getDamage())+" %");
+                    break;
+            }
         }
     }
+    
+    private void initializeScorePanel(){
+        JPanel scorePanel = new JPanel();
+        setLayout(null);
+        scorePanel.setBackground(Color.CYAN);
+        scorePanel.setPreferredSize(new Dimension(300, 200));
+        scorePanel.setBounds(new Rectangle(new Point(600, 70), new Dimension(350, 280)));
+        scorePanel.setLayout(new GridLayout(6, 3, 10, 5));
+    
+        iconP0 = new javax.swing.JLabel();
+        iconP1 = new javax.swing.JLabel();
+        iconP2 = new javax.swing.JLabel();
+        iconP3 = new javax.swing.JLabel();
+        iconP4 = new javax.swing.JLabel();
+        scoreP3 = new javax.swing.JLabel();
+        healthP4 = new javax.swing.JLabel();
+        healthP3 = new javax.swing.JLabel();
+        scoreP4 = new javax.swing.JLabel();
+        scoreP2 = new javax.swing.JLabel();
+        healthP2 = new javax.swing.JLabel();
+        scoreP1 = new javax.swing.JLabel();
+        healthP1 = new javax.swing.JLabel();
+        healthP0 = new javax.swing.JLabel();
+        scoreP0 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
+        iconP0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank0.png"))); // NOI18N
+
+        iconP1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank1.png"))); // NOI18N
+
+        iconP2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank2.png"))); // NOI18N
+
+        iconP3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank3.png"))); // NOI18N
+
+        iconP4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank4.png"))); // NOI18N
+
+        scoreP3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        scoreP3.setForeground(new java.awt.Color(0, 0, 255));
+        scoreP3.setText("0000 $");
+
+        healthP4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        healthP4.setForeground(new java.awt.Color(0, 0, 255));
+        healthP4.setText("00 %");
+
+        healthP3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        healthP3.setForeground(new java.awt.Color(0, 0, 255));
+        healthP3.setText("00 %");
+
+        scoreP4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        scoreP4.setForeground(new java.awt.Color(0, 0, 255));
+        scoreP4.setText("0000 $");
+
+        scoreP2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        scoreP2.setForeground(new java.awt.Color(0, 0, 255));
+        scoreP2.setText("0000 $");
+
+        healthP2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        healthP2.setForeground(new java.awt.Color(0, 0, 255));
+        healthP2.setText("00 %");
+
+        scoreP1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        scoreP1.setForeground(new java.awt.Color(0, 0, 255));
+        scoreP1.setText("0000 $");
+
+        healthP1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        healthP1.setForeground(new java.awt.Color(0, 0, 255));
+        healthP1.setText("00 %");
+
+        healthP0.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        healthP0.setForeground(new java.awt.Color(0, 0, 255));
+        healthP0.setText("00 %");
+
+        scoreP0.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        scoreP0.setForeground(new java.awt.Color(0, 0, 255));
+        scoreP0.setText("0000 $");
+
+        jLabel1.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel1.setText("SCORE");
+
+        jLabel2.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 18)); // NOI18N
+        jLabel2.setText("HEALTH");
+
+        JLabel empty = new JLabel();
+        scorePanel.add(empty);        
+        scorePanel.add(jLabel1);
+        scorePanel.add(jLabel2);
+        scorePanel.add(iconP0);scorePanel.add(scoreP0);scorePanel.add(healthP0);
+        scorePanel.add(iconP1);scorePanel.add(scoreP1);scorePanel.add(healthP1);
+        scorePanel.add(iconP2);scorePanel.add(scoreP2);scorePanel.add(healthP2);
+        scorePanel.add(iconP3);scorePanel.add(scoreP3);scorePanel.add(healthP3);
+        scorePanel.add(iconP4);scorePanel.add(scoreP4);scorePanel.add(healthP4);
+        
+        this.add(scorePanel);
+    }
+    
+    private javax.swing.JLabel healthP0;
+    private javax.swing.JLabel healthP1;
+    private javax.swing.JLabel healthP2;
+    private javax.swing.JLabel healthP3;
+    private javax.swing.JLabel healthP4;
+    private javax.swing.JLabel iconP0;
+    private javax.swing.JLabel iconP1;
+    private javax.swing.JLabel iconP2;
+    private javax.swing.JLabel iconP3;
+    private javax.swing.JLabel iconP4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel scoreP0;
+    private javax.swing.JLabel scoreP1;
+    private javax.swing.JLabel scoreP2;
+    private javax.swing.JLabel scoreP3;
+    private javax.swing.JLabel scoreP4;
 }
 
 
