@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author Madawa
@@ -71,147 +73,99 @@ public class ScoreBoard extends javax.swing.JPanel {
         healthP0 = new javax.swing.JLabel();
         scoreP0 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(240, 248, 181));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        setMaximumSize(new java.awt.Dimension(424, 302));
+        setName("Score Board"); // NOI18N
+        setOpaque(false);
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         iconP0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank2.png"))); // NOI18N
-        iconP0.setPreferredSize(new java.awt.Dimension(25, 25));
+        add(iconP0, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 101, -1, -1));
 
         iconP1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank2.png"))); // NOI18N
-        iconP1.setPreferredSize(new java.awt.Dimension(25, 25));
+        add(iconP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 58, -1, -1));
 
         iconP2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank2.png"))); // NOI18N
         iconP2.setToolTipText("");
-        iconP2.setPreferredSize(new java.awt.Dimension(25, 25));
+        add(iconP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 187, -1, -1));
 
         iconP3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank2.png"))); // NOI18N
-        iconP3.setPreferredSize(new java.awt.Dimension(25, 25));
+        add(iconP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 144, -1, -1));
 
         iconP4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/tank2.png"))); // NOI18N
         iconP4.setToolTipText("");
-        iconP4.setPreferredSize(new java.awt.Dimension(25, 25));
+        add(iconP4, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 230, -1, -1));
 
         scoreP3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         scoreP3.setForeground(new java.awt.Color(0, 0, 255));
         scoreP3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         scoreP3.setText("0000");
-        scoreP3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scoreP3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        add(scoreP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 187, 108, 25));
 
         healthP4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         healthP4.setForeground(new java.awt.Color(0, 0, 255));
         healthP4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         healthP4.setText("0000");
-        healthP4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        healthP4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        add(healthP4, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 230, 108, 25));
 
         healthP3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         healthP3.setForeground(new java.awt.Color(0, 0, 255));
         healthP3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         healthP3.setText("0000");
-        healthP3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        healthP3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        add(healthP3, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 187, 108, 25));
 
         scoreP4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         scoreP4.setForeground(new java.awt.Color(0, 0, 255));
         scoreP4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         scoreP4.setText("0000");
-        scoreP4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scoreP4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        add(scoreP4, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 230, 108, 25));
 
         scoreP2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         scoreP2.setForeground(new java.awt.Color(0, 0, 255));
         scoreP2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         scoreP2.setText("0000");
-        scoreP2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scoreP2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        add(scoreP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 144, 108, 25));
 
         healthP2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         healthP2.setForeground(new java.awt.Color(0, 0, 255));
         healthP2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         healthP2.setText("0000");
-        healthP2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        healthP2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        add(healthP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 144, 108, 25));
 
         scoreP1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         scoreP1.setForeground(new java.awt.Color(0, 0, 255));
         scoreP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         scoreP1.setText("0000");
-        scoreP1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scoreP1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        add(scoreP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 101, 108, 25));
 
         healthP1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         healthP1.setForeground(new java.awt.Color(0, 0, 255));
         healthP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         healthP1.setText("0000");
-        healthP1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        healthP1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        add(healthP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 101, 108, 25));
 
         healthP0.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         healthP0.setForeground(new java.awt.Color(0, 0, 255));
         healthP0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         healthP0.setText("0000");
-        healthP0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        healthP0.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        add(healthP0, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 58, 108, 25));
 
         scoreP0.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         scoreP0.setForeground(new java.awt.Color(0, 0, 255));
         scoreP0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         scoreP0.setText("0000");
-        scoreP0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(iconP4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iconP0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iconP2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iconP3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iconP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(scoreP3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(scoreP2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(scoreP1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(scoreP0, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(64, 64, 64)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(healthP0, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(healthP2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(healthP3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(healthP1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(scoreP4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(healthP4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(iconP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(healthP0, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(scoreP0, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(iconP0, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(scoreP1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(healthP1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(iconP3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(scoreP2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(healthP2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(iconP2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(healthP3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(scoreP3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(scoreP4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(healthP4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(iconP4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
-        );
+        scoreP0.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        add(scoreP0, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 58, 108, 25));
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JLabel healthP0;

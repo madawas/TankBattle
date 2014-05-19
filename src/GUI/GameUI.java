@@ -35,11 +35,9 @@ public class GameUI extends JFrame {
     
     private void setupScoreBoard(){
         this.scoreBoard = new ScoreBoard();
-        this.scoreBoard.setBackground(Color.CYAN);
         this.scoreBoard.setMaximumSize(new Dimension(424, 302));
         this.scoreBoard.setSize(424, 302);
-        this.scoreBoard.setAlignmentY(50.0f);
-        this.scoreBoard.setAlignmentX(600.0f);
+        this.scoreBoard.setLocation(600, 50);
     }
 
     public GamePanel getGameInterface() {
