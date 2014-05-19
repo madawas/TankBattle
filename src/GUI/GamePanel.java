@@ -42,7 +42,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public GamePanel() {
         this.transform = new AffineTransform();
         this.background = new ImageIcon("images/background.jpg");
-        this.tilemap = new ImageIcon("images/tilemap.jpg");
+        this.tilemap = new ImageIcon("images/tilemap.png");
         setDoubleBuffered(true);
     }
 
