@@ -39,7 +39,7 @@ public class AreaMap {
 			map.add(new ArrayList<Node>());
 			for (int y=0; y<mapHeight; y++) {
 				node = new Node(x,y);
-				if (obstacleMap[x][y] == 1)
+				if (obstacleMap[x][y] !=0)
 					node.setObstical(true);
 				map.get(x).add(node);
 			}
