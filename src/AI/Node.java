@@ -23,6 +23,7 @@ public class Node implements Comparable<Node> {
 	boolean isObstacle;
 	boolean isStart;
 	boolean isGoal;
+        public int type;//0-blank,2-player,3-brick,5 - stone, 6-coin,7-firstaid, 4 - water
 	
 	Node(int x, int y) {
 		neighborList = new ArrayList<Node>();
